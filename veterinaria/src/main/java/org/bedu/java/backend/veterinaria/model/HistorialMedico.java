@@ -2,24 +2,39 @@ package org.bedu.java.backend.veterinaria.model;
 
 import java.time.LocalDate;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+
+
 public class HistorialMedico {
 
+    @Positive(message = "El identificador no puede ser un número negativo o cero")
     private long id;
-
+    /*
+     * @NotNull:
+     * Propósito: Garantiza que el valor no sea nulo.
+     * Para comprobar si hay un objeto.
+     */
+    @NotNull
     private DoctorModel doctor;
 
+    @NotNull
     private Paciente paciente;
     
+    @NotNull
     private LocalDate fechaConsulta;
-
+    
+    @NotBlank(message = "El diagnóstico no puede estar en blanco")
     private String diagnostico;
 
+    @NotBlank(message = "El tratamiento no puede estar en blanco")
     private String tratamientoActual;
 
     private String medicamentosRecetados;
 
     private String resultadoPruebas;
-
+    
     private String observaciones;
 
     public HistorialMedico() {

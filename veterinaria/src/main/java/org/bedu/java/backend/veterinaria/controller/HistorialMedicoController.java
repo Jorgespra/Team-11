@@ -6,6 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import jakarta.validation.Valid;
+
 import java.util.List;
 
 @RestController
@@ -43,14 +45,14 @@ public class HistorialMedicoController {
 
     // Endpoint para crear un nuevo historial médico
     @PostMapping 
-    public ResponseEntity<HistorialMedico> crearHistorial(@RequestBody HistorialMedico historial) {
+    public ResponseEntity<HistorialMedico> crearHistorial(@Valid @RequestBody HistorialMedico historial) {
         HistorialMedico nuevoHistorial = historialMedicoService.crearHistorial(historial);
         return new ResponseEntity<>(nuevoHistorial, HttpStatus.CREATED);
     }
 
     // Endpoint para actualizar un historial médico existente
     @PutMapping("/{id}") 
-    public ResponseEntity<HistorialMedico> actualizarHistorial(@PathVariable long id, @RequestBody HistorialMedico historial) {
+    public ResponseEntity<HistorialMedico> actualizarHistorial(@PathVariable long id, @Valid @RequestBody HistorialMedico historial) {
         HistorialMedico historialActualizado = historialMedicoService.actualizarHistorial(id, historial);
         if (historialActualizado != null) {
             return new ResponseEntity<>(historialActualizado, HttpStatus.OK);
