@@ -1,8 +1,8 @@
-package org.bedu.java.backend.veterinaria.model;
+package org.bedu.java.backend.veterinaria.dto;
 
 import java.util.Date;
 
-public class Medicamento {
+public class MedicamentoDTO {
     private long id;
     private String nombre;
     private String clasificacion;
@@ -12,7 +12,7 @@ public class Medicamento {
     private float precio;
     private String instruccionesUso;
 
-    public Medicamento(long id, String nombre, String clasificacion, String descripcion, Date fechaCaducidad, int existencia, float precio, String instruccionesUso) {
+    public MedicamentoDTO(long id, String nombre, String clasificacion, String descripcion, Date fechaCaducidad, int existencia, float precio, String instruccionesUso) {
         this.id = id;
         this.nombre = nombre;
         this.clasificacion = clasificacion;

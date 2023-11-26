@@ -1,38 +1,28 @@
 package org.bedu.java.backend.veterinaria.controller;
 
-import org.bedu.java.backend.veterinaria.model.Medicamento;
-import org.springframework.http.ResponseEntity;
+import jakarta.validation.Valid;
+import org.bedu.java.backend.veterinaria.dto.CreateMedicamentoDTO;
+import org.bedu.java.backend.veterinaria.dto.MedicamentoDTO;
+import org.bedu.java.backend.veterinaria.service.MedicamentoService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.annotation.RequestScope;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("medicamento")
 public class MedicamentoController {
 
-    @GetMapping("/{medicamentoId}")
-    public ResponseEntity<Medicamento> getMedicamento(@PathVariable Long medicamentoId) {
-        return null;
+    @Autowired
+    private MedicamentoService medicamentoService;
+
+    @RequestMapping("/obtenerMedicamentos")
+    public List<MedicamentoDTO> getAll() {
+        return medicamentoService.getAll();
     }
 
-    @GetMapping
-    public ResponseEntity<List<Medicamento>> getMedicamentos() {
-        return null;
+    @RequestMapping("/crearMedicamento")
+    public MedicamentoDTO save(@Valid @RequestBody CreateMedicamentoDTO data) {
+        return medicamentoService.save(data);
     }
 
-    @PostMapping
-    public ResponseEntity<Void> creaMedicamento(@RequestBody Medicamento medicamento) {
-        return null;
-    }
-
-    @PutMapping("/{medicamentoId}")
-    public ResponseEntity<Void> actualizaMedicamento(@PathVariable Long medicamentoId, @RequestBody Medicamento medicamento) {
-        return null;
-    }
-
-    @DeleteMapping("/{medicamentoId}")
-    public ResponseEntity<Void> eliminaMedicamento(@PathVariable Long medicamentoId) {
-        return null;
-    }
 }

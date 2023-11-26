@@ -1,35 +1,24 @@
-package org.bedu.java.backend.veterinaria.model;
+package org.bedu.java.backend.veterinaria.dto;
+
+import jakarta.validation.constraints.*;
 
 import java.util.Date;
 
-public class Medicamento {
-    private long id;
+public class CreateMedicamentoDTO {
+    @NotBlank(message = "El nombre del medicamento es obligatorio")
     private String nombre;
+    @NotBlank(message = "La clasificación del medicamento es obligatoria")
     private String clasificacion;
+    @NotBlank(message ="LA descripción del medicamento es obligatoria")
     private String descripcion;
+    @NotNull(message = "La fecha de caducidad del medicamento no puede ser nula")
     private Date fechaCaducidad;
+    @Min(value = 1, message = "La cantidad o existencia del medicamento debe ser mayor o igual que 1")
     private int existencia;
+    @DecimalMin(value = "0.0", message = "El precio del medicamento debe ser mayor o igual que 0.0")
     private float precio;
+    @NotBlank(message = "Las instrucciones de uso del medicamento son obligatorias")
     private String instruccionesUso;
-
-    public Medicamento(long id, String nombre, String clasificacion, String descripcion, Date fechaCaducidad, int existencia, float precio, String instruccionesUso) {
-        this.id = id;
-        this.nombre = nombre;
-        this.clasificacion = clasificacion;
-        this.descripcion = descripcion;
-        this.fechaCaducidad = fechaCaducidad;
-        this.existencia = existencia;
-        this.precio = precio;
-        this.instruccionesUso = instruccionesUso;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public String getNombre() {
         return nombre;
