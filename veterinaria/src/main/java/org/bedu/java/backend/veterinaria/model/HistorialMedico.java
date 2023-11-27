@@ -20,7 +20,7 @@ public class HistorialMedico {
     private DoctorModel doctor;
 
     @NotNull
-    private Paciente paciente;
+    private Mascota mascota;
     
     @NotNull
     private LocalDate fechaConsulta;
@@ -42,11 +42,11 @@ public class HistorialMedico {
     }
 
 
-    public HistorialMedico(long id, DoctorModel doctor, Paciente paciente, LocalDate fechaConsulta, String diagnostico,
+    public HistorialMedico(long id, DoctorModel doctor, Mascota mascota, LocalDate fechaConsulta, String diagnostico,
             String tratamientoActual, String medicamentosRecetados, String resultadoPruebas, String observaciones) {
         this.id = id;
         this.doctor = doctor;
-        this.paciente = paciente;
+        this.mascota = mascota;
         this.fechaConsulta = fechaConsulta;
         this.diagnostico = diagnostico;
         this.tratamientoActual = tratamientoActual;
@@ -71,15 +71,7 @@ public class HistorialMedico {
     public void setDoctor(DoctorModel doctor) {
         this.doctor = doctor;
     }
-
-    public Paciente getPaciente() {
-        return paciente;
-    }
-
-    public void setPaciente(Paciente paciente) {
-        this.paciente = paciente;
-    }
-
+    
     public LocalDate getFechaConsulta() {
         return fechaConsulta;
     }
@@ -126,5 +118,15 @@ public class HistorialMedico {
 
     public void setObservaciones(String observaciones) {
         this.observaciones = observaciones;
+    }
+
+
+    public Mascota getMascota() {
+        return mascota;
+    }
+
+
+    public void setMascota(Mascota mascota) {
+        this.mascota = mascota;
     }
 }
