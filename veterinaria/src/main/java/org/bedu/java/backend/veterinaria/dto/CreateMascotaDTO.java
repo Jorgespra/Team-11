@@ -3,7 +3,7 @@ package org.bedu.java.backend.veterinaria.dto;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 
-public class CreatePacienteDTO {
+public class CreateMascotaDTO {
     @NotBlank
     private String nombre;
     @NotBlank

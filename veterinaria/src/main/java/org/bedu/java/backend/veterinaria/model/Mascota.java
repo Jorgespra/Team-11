@@ -1,13 +1,13 @@
-package org.bedu.java.backend.veterinaria.dto;
+package org.bedu.java.backend.veterinaria.model;
 
-public class PacienteDTO {
+public class Mascota {
     private int id;
     private String nombre;
     private String especie;
     private String raza;
     private int edad;
 
-    public PacienteDTO(int id, String nombre, String especie, String raza, int edad) {
+    public Mascota(int id, String nombre, String especie, String raza, int edad) {
         this.id = id;
         this.nombre = nombre;
         this.especie = especie;
@@ -19,8 +19,8 @@ public class PacienteDTO {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int currentId) {
+        this.id = currentId;
     }
 
     public String getNombre() {
@@ -54,4 +54,5 @@ public class PacienteDTO {
     public void setEdad(int edad) {
         this.edad = edad;
     }
+    
 }
