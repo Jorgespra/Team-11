@@ -1,19 +1,17 @@
-package org.bedu.java.backend.veterinaria.model.facturas;
+package org.bedu.java.backend.veterinaria.dto;
 
-public class Factura {
-    private long id;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotBlank;
+
+public class CreatefacturasDTO {
+    @NotBlank(message = "Los detalles de la facura son obligatorios")
     private String detalles;
+    @NotBlank(message = "Los detalles del servicio  son obligatorios")
     private String servicios;
+    @NotBlank(message = "Los medicamentos son obligatorios")
     private String medicamentos;
+    @DecimalMin(value = "1.0", message = "Se debe de facturar una cantidad mayor a cero")
     private double costo;
-
-    public Factura(long id, String detalles, String servicios, String medicamentos, double costo) {
-        this.id = id;
-        this.detalles = detalles;
-        this.servicios = servicios;
-        this.medicamentos = medicamentos;
-        this.costo = costo;
-    }
 
     public String getDetalles() {
         return detalles;
@@ -46,13 +44,4 @@ public class Factura {
     public void setCosto(double costo) {
         this.costo = costo;
     }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
 }

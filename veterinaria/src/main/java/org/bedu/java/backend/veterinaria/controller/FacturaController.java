@@ -1,10 +1,10 @@
-package org.bedu.java.backend.veterinaria.controller.facturas;
+package org.bedu.java.backend.veterinaria.controller;
 
 import java.util.List;
 
-import org.bedu.java.backend.veterinaria.dto.facturas.CreatefacturasDTO;
-import org.bedu.java.backend.veterinaria.dto.facturas.FacturaDTO;
-import org.bedu.java.backend.veterinaria.service.facturas.FacturaService;
+import org.bedu.java.backend.veterinaria.dto.CreatefacturasDTO;
+import org.bedu.java.backend.veterinaria.dto.FacturaDTO;
+import org.bedu.java.backend.veterinaria.service.FacturaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -1,10 +1,10 @@
-package org.bedu.java.backend.veterinaria.repository.facturas;
+package org.bedu.java.backend.veterinaria.repository;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
-import org.bedu.java.backend.veterinaria.model.facturas.Factura;
+import org.bedu.java.backend.veterinaria.model.Factura;
 import org.springframework.stereotype.Repository;
 
 @Repository

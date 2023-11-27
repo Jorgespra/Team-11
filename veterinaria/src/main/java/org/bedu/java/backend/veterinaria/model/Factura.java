@@ -1,26 +1,18 @@
-package org.bedu.java.backend.veterinaria.dto.facturas;
+package org.bedu.java.backend.veterinaria.model;
 
-public class FacturaDTO {
+public class Factura {
     private long id;
     private String detalles;
     private String servicios;
     private String medicamentos;
     private double costo;
 
-    public FacturaDTO(long id, String detalles, String servicios, String medicamentos, double costo) {
+    public Factura(long id, String detalles, String servicios, String medicamentos, double costo) {
         this.id = id;
         this.detalles = detalles;
         this.servicios = servicios;
         this.medicamentos = medicamentos;
         this.costo = costo;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getDetalles() {
@@ -53,6 +45,14 @@ public class FacturaDTO {
 
     public void setCosto(double costo) {
         this.costo = costo;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
 }
