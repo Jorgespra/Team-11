@@ -9,9 +9,11 @@ import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring", injectionStrategy = InjectionStrategy.CONSTRUCTOR)
 public interface MedicamentoMapper {
+
     MedicamentoDTO toDTO(Medicamento model);
 
     @Mapping(target = "id", ignore = true)
     @Mapping(source = "caducidad", target="fechaCaducidad")
     Medicamento toModel(CreateMedicamentoDTO dto);
+
 }

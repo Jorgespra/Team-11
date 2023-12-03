@@ -16,12 +16,12 @@ import java.util.List;
 public class MedicamentoController {
 
     @Autowired
-    private MedicamentoService medicamentoService;
+    private MedicamentoService service;
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<MedicamentoDTO> getAll() {
-        return medicamentoService.getAll();
+    public List<MedicamentoDTO> findAll() {
+        return service.findAll();
     }
 
     @PostMapping
@@ -29,7 +29,7 @@ public class MedicamentoController {
     public MedicamentoDTO save(@Valid @RequestBody CreateMedicamentoDTO data) {
         log.info("Ejecutando guardado de un medicamento...");
         log.info(data.toString());
-        return medicamentoService.save(data);
+        return service.save(data);
     }
 
 }

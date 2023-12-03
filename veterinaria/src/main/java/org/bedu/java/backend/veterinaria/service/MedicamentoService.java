@@ -14,19 +14,24 @@ import java.util.List;
 public class MedicamentoService {
 
     @Autowired
-    private MedicamentoRepository medicamentoRepository;
+    private MedicamentoRepository repository;
 
     @Autowired
-    private MedicamentoMapper medicamentoMapper;
+    private MedicamentoMapper mapper;
 
-    public List<MedicamentoDTO> getAll() {
-        List<Medicamento> medicamentos = medicamentoRepository.getAll();
-        return medicamentos.stream().map(x -> medicamentoMapper.toDTO(x)).toList();
+    public List<MedicamentoDTO> findAll() {
+
+        return repository
+                .findAll()
+                .stream()
+                .map(mapper::toDTO)
+                .toList();
     }
 
     public MedicamentoDTO save(CreateMedicamentoDTO data) {
-        Medicamento model = medicamentoMapper.toModel(data);
-        return medicamentoMapper.toDTO(medicamentoRepository.save(model));
+        Medicamento entity = repository
+                .save(mapper.toModel(data));
+        return  mapper.toDTO(entity);
     }
 
 }

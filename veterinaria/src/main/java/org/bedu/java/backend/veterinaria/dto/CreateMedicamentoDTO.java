@@ -27,5 +27,4 @@ public class CreateMedicamentoDTO {
 
     @NotBlank(message = "Las instrucciones de uso del medicamento son obligatorias")
     private String instruccionesUso;
-
 }
