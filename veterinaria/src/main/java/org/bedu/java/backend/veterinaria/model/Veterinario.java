@@ -39,10 +39,10 @@ public class Veterinario {
     @Column(nullable = false, length = 100)
     private String especialidad;
 
-    @Column(nullable = false, length = 100)
+    @Column(name="hora_entrada", nullable = false, length = 100)
     private String horaEntrada;
 
-    @Column(nullable = false, length = 100)
+    @Column(name = "hora_salida", nullable = false, length = 100)
     private String horaSalida;
 
 
