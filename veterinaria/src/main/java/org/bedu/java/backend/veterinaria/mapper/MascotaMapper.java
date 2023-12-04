@@ -22,7 +22,7 @@ public interface MascotaMapper {
     // En el target se va a ignorar el campo "id"
     @Mapping(target = "id", ignore = true)
     // "stock" en el source pasa a ser "quantity" en el target
-    @Mapping(source = "stock", target = "quantity")
+    // @Mapping(source = "stock", target = "quantity")
     Mascota toModel(CreateMascotaDTO dto);
     
 }
