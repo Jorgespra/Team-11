@@ -1,58 +1,49 @@
 package org.bedu.java.backend.veterinaria.model;
 
+// import lombok.AllArgsConstructor;
+// import lombok.Data;
+
+// @Data
+// @AllArgsConstructor
+
+import org.hibernate.validator.constraints.Range;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.DecimalMax;
+import jakarta.validation.constraints.DecimalMin;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@ToString
+@Entity
+@Table(name = "factura")
 public class Factura {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    private String detalles;
-    private String servicios;
-    private String medicamentos;
+
+    @Column(nullable = false, length = 100)
+    private String servicio;
+
+    private Medicamento medicamento;
+
+    @Column(nullable = false, length = 100)
+    private String detalle;
+
+    @Range(min = 1, max = 1000)
+    private int cantidad;
+
+    @DecimalMin("0.01")
+    @DecimalMax("9999999.99")
     private double costo;
-
-    public Factura(long id, String detalles, String servicios, String medicamentos, double costo) {
-        this.id = id;
-        this.detalles = detalles;
-        this.servicios = servicios;
-        this.medicamentos = medicamentos;
-        this.costo = costo;
-    }
-
-    public String getDetalles() {
-        return detalles;
-    }
-
-    public void setDetalles(String detalles) {
-        this.detalles = detalles;
-    }
-
-    public String getServicios() {
-        return servicios;
-    }
-
-    public void setServicios(String servicios) {
-        this.servicios = servicios;
-    }
-
-    public String getMedicamentos() {
-        return medicamentos;
-    }
-
-    public void setMedicamentos(String medicamentos) {
-        this.medicamentos = medicamentos;
-    }
-
-    public double getCosto() {
-        return costo;
-    }
-
-    public void setCosto(double costo) {
-        this.costo = costo;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
 }
