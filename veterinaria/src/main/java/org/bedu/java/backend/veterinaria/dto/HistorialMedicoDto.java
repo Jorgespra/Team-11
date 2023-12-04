@@ -2,7 +2,7 @@ package org.bedu.java.backend.veterinaria.dto;
 
 import java.time.LocalDate;
 
-import org.bedu.java.backend.veterinaria.model.DoctorModel;
+import org.bedu.java.backend.veterinaria.model.Veterinario;
 import org.bedu.java.backend.veterinaria.model.Mascota;
 
 import jakarta.validation.constraints.NotBlank;
@@ -21,7 +21,7 @@ public class HistorialMedicoDto {
     private long id;
     
     @NotNull
-    private DoctorModel doctor;
+    private Veterinario doctor;
 
     @NotNull
     private Mascota mascota;

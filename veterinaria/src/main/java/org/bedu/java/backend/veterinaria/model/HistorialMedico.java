@@ -27,11 +27,11 @@ public class HistorialMedico {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "doctor_id", nullable = false)
-    private DoctorModel doctor;
+    //@JoinColumn(name = "doctor_id", nullable = false)
+    private Veterinario doctor;
 
     @ManyToOne
-    @JoinColumn(name = "mascota_id", nullable = false)
+    //@JoinColumn(name = "mascota_id", nullable = false)
     private Mascota mascota;
     
     @Column(nullable = false)
