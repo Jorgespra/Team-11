@@ -5,6 +5,8 @@ import lombok.Data;
 
 import java.util.Date;
 
+import org.bedu.java.backend.veterinaria.model.Factura;
+
 @Data
 public class CreateMedicamentoDTO {
     @NotBlank(message = "El nombre del medicamento es obligatorio")
@@ -27,4 +29,7 @@ public class CreateMedicamentoDTO {
 
     @NotBlank(message = "Las instrucciones de uso del medicamento son obligatorias")
     private String instruccionesUso;
+
+    private Factura factura;
+
 }

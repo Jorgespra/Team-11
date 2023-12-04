@@ -1,5 +1,7 @@
 package org.bedu.java.backend.veterinaria.model;
 
+import java.util.List;
+
 // import lombok.AllArgsConstructor;
 // import lombok.Data;
 
@@ -10,13 +12,18 @@ import org.hibernate.validator.constraints.Range;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+// import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+// import jakarta.persistence.JoinColumn;
+// import jakarta.persistence.JoinColumns;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.DecimalMin;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -24,23 +31,30 @@ import lombok.ToString;
 @Setter
 @ToString
 @Entity
-@Table(name = "factura")
+@NoArgsConstructor
+@Table(name = "facturas")
 public class Factura {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
+    
     @Column(nullable = false, length = 100)
     private String servicio;
-
-    private Medicamento medicamento;
-
+    
+    
     @Column(nullable = false, length = 100)
     private String detalle;
-
+    
     @Range(min = 1, max = 1000)
     private int cantidad;
+    
+    // @JoinColumns({
+	// 	@JoinColumn(name="MEDICAMENTO_ID",referencedColumnName="id")
+	// })
+    // @JoinColumn(name = Medicamento.id)
+    @OneToMany(mappedBy = "factura")
+    private List<Medicamento> medicamentos;
 
     @DecimalMin("0.01")
     @DecimalMax("9999999.99")

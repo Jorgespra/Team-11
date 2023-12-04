@@ -5,9 +5,11 @@ import lombok.Data;
 
 import java.util.Date;
 
-@Data
-public class MedicamentoDTO {
+import org.bedu.java.backend.veterinaria.model.Factura;
 
+@Data
+@AllArgsConstructor
+public class MedicamentoDTO {
     private long id;
     private String nombre;
     private String clasificacion;
@@ -16,5 +18,5 @@ public class MedicamentoDTO {
     private int existencia;
     private float precio;
     private String instruccionesUso;
-
+    private Factura factura;
 }

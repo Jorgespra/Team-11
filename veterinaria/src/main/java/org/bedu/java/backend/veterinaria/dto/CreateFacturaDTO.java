@@ -1,5 +1,7 @@
 package org.bedu.java.backend.veterinaria.dto;
 
+import java.util.List;
+
 import org.bedu.java.backend.veterinaria.model.Medicamento;
 
 import jakarta.validation.constraints.DecimalMin;
@@ -23,7 +25,7 @@ public class CreateFacturaDTO {
     @NotBlank(message = "Se debe incluir descripcion del servicio")
     private String servicio;
 
-    private Medicamento medicamento;
+    private List <Medicamento>  medicamentos;
 
     @NotBlank(message = "Falta incluir detalles del producto o servicio")
     private String detalle;
