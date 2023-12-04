@@ -1,50 +1,40 @@
 package org.bedu.java.backend.veterinaria.service;
 
-import org.bedu.citas.dto.CitaDTO;
-import org.bedu.citas.dto.CreateCitaDTO;
-import org.bedu.citas.model.Cita;
-import org.bedu.citas.repository.CitaRepository;
+import java.util.List;
 import org.bedu.java.backend.veterinaria.dto.CitaDTO;
+import org.bedu.java.backend.veterinaria.dto.CreateCitaDTO;
+import org.bedu.java.backend.veterinaria.mapper.CitasMapper;
+import org.bedu.java.backend.veterinaria.model.Cita;
+import org.bedu.java.backend.veterinaria.repository.CitaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.LinkedList;
-import java.util.List;
+
 
 @Service
 public class CitaService {
 
     @Autowired
-    private CitaRepository citaRepository;
+    private CitaRepository repository;
 
-    public List<CitaDTO> getAll(){
-        List<Cita> cita = citaRepository.getAll();
-        List<CitaDTO> data = new LinkedList<>();
+    @Autowired
+    private CitasMapper mapper;
 
-        for (Cita citas : cita){
-            data.add(toDTO(citas));
-        }
-        return data;
+    public List<CitaDTO> findAll(){
+        return repository
+                .findAll()
+                .stream()
+                .map(mapper::toDTO)
+                .toList();
     }
 
-    public CitaDTO save (CreateCitaDTO data){
-        Cita model = toModel(data);
-        return toDTO (citaRepository.save(model));
+    public CitaDTO save(CreateCitaDTO data){
+        Cita entity = repository
+                .save(mapper.toModel(data));
+
+        return mapper.toDTO(entity);
     }
-
-    private Cita toModel (CreateCitaDTO dto){
-        return new Cita(0,dto.getPetName(), dto.getVetName(), dto.getDueAppointment(), dto.getDayAppointment(), dto.getHourAppointmet());
-    }
-
-    private Cita toModel (CitaDTO dto){
-        return new Cita(dto.getId(), dto.getVetName(), dto.getPetName(), dto.getDueAppointment(), dto.getDayAppointment(), dto.getHourAppointmet());
-    }
-
-    private CitaDTO toDTO (Cita model){
-        return new CitaDTO (model.getId(), model.getVetName(), model.getPetName(), model.getDueAppointment(), model.getDayAppointment(), model.getHourAppointmet());
-    }
-
-
 }
 
 

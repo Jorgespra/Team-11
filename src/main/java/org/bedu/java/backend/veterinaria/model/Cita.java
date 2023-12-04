@@ -1,74 +1,34 @@
 package org.bedu.java.backend.veterinaria.model;
 
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 import java.sql.Time;
 import java.util.Date;
 
+@Getter
+@Setter
+@ToString
+@Entity
+@Table(name = "citas")
+
 public class Cita {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    private String VetName;
-    private String PetName;
-    private String DueAppointment;
-    private Date DayAppointment;
-    private Time HourAppointmet;
+    @Column(nullable = false, length = 50)
+    private String vetName;
+    @Column(nullable = false, length = 50)
+    private String petName;
+    @Column(nullable = false, length = 200)
+    private String dueAppointment;
+    @Column (nullable = false)
+    private Date dayAppointment;
+    @Column (nullable = false)
+    private Time hourAppointment;
 
-    public Cita(long id, String dueAppointment, String vetName, String appointment, Date dayAppointment, Time hourAppointmet) {
-        DueAppointment = dueAppointment;
-    }
 
-    public String getDueAppointment() {
-        return DueAppointment;
-    }
-
-    public void setDueAppointment(String dueAppointment) {
-        DueAppointment = dueAppointment;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getVetName() {
-        return VetName;
-    }
-
-    public void setVetName(String vetName) {
-        VetName = vetName;
-    }
-
-    public String getPetName() {
-        return PetName;
-    }
-
-    public void setPetName(String petName) {
-        PetName = petName;
-    }
-
-    public Date getDayAppointment() {
-        return DayAppointment;
-    }
-
-    public void setDayAppointment(Date dayAppointment) {
-        DayAppointment = dayAppointment;
-    }
-
-    public Time getHourAppointmet() {
-        return HourAppointmet;
-    }
-
-    public void setHourAppointmet(Time hourAppointmet) {
-        HourAppointmet = hourAppointmet;
-    }
-
-    public Cita(long id, String vetName, String petName, Date dayAppointment, Time hourAppointmet) {
-        this.id = id;
-        VetName = vetName;
-        PetName = petName;
-        DayAppointment = dayAppointment;
-        HourAppointmet = hourAppointmet;
-    }
 }
