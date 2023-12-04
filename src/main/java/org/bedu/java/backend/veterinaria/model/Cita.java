@@ -5,8 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.sql.Time;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Getter
 @Setter
@@ -19,16 +19,21 @@ public class Cita {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    @Column(nullable = false, length = 50)
-    private String vetName;
-    @Column(nullable = false, length = 50)
-    private String petName;
+
+    @ManyToOne
+    @JoinColumn(name = "veterinario_id", nullable = false)
+    private Veterinario veterinario;
+
+    @ManyToOne
+    @JoinColumn (name = "mascota_id", nullable = false)
+   private Mascota mascota;
+
     @Column(nullable = false, length = 200)
-    private String dueAppointment;
+    private String motivoDelaConsulta;
     @Column (nullable = false)
-    private Date dayAppointment;
+    private LocalDate fechaConsulta;
     @Column (nullable = false)
-    private Time hourAppointment;
+    private LocalTime hora;
 
 
 }

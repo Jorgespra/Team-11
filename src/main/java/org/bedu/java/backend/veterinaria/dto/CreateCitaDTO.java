@@ -2,24 +2,26 @@ package org.bedu.java.backend.veterinaria.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
+import org.bedu.java.backend.veterinaria.model.Mascota;
+import org.bedu.java.backend.veterinaria.model.Veterinario;
 
-import java.sql.Time;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 
 @Data
 public class CreateCitaDTO {
 
     @NotBlank
-    private String vetName;
+    private Veterinario veterinario;
     @NotBlank
-    private String petName;
+    private Mascota mascota;
     @NotBlank
-    private String dueAppointment;
+    private String motivoDelaConsulta;
     @NotBlank
-    private Date dayAppointment;
+    private LocalDate fechaConsulta;
     @NotBlank
-    private Time hourAppointment;
+    private LocalTime hora;
 
 
 

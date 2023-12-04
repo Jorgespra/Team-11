@@ -1,21 +1,22 @@
 package org.bedu.java.backend.veterinaria.dto;
 
-import jakarta.persistence.Column;
 import lombok.Data;
+import org.bedu.java.backend.veterinaria.model.Mascota;
+import org.bedu.java.backend.veterinaria.model.Veterinario;
 
-import java.sql.Time;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 
 @Data
 public class CitaDTO {
 
     private long id;
-    private String vetName;
-    private String petName;
-    private String dueAppointment;
-    private Date dayAppointment;
-    private Time hourAppointment;
+    private Veterinario veterinario;
+    private Mascota mascota;
+    private String motivoDelaConsulta;
+    private LocalDate fechaConsulta;
+    private LocalTime hora;
 
 }
 
