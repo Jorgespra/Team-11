@@ -6,14 +6,14 @@ public class DoctorModel {
     private String nombreDoctor;
     private String apellidoDoctor;
     private String fecha_nacimientoDoctor;
-    private long celularDoctor;
+    private String celularDoctor;
     private String correoDoctor;
     private String especialidadDoctor;
     private String hora_entradaDoctor;
     private String hora_salidaDoctor;
 
     public DoctorModel(long id, String nombreDoctor, String apellidoDoctor, String fecha_nacimientoDoctor,
-            long celularDoctor, String correoDoctor, String especialidadDoctor, String hora_entradaDoctor,
+            String celularDoctor, String correoDoctor, String especialidadDoctor, String hora_entradaDoctor,
             String hora_salidaDoctor) {
         this.id = id;
         this.nombreDoctor = nombreDoctor;
@@ -58,11 +58,11 @@ public class DoctorModel {
         this.fecha_nacimientoDoctor = fecha_nacimientoDoctor;
     }
 
-    public long getCelularDoctor() {
+    public String getCelularDoctor() {
         return celularDoctor;
     }
 
-    public void setCelularDoctor(long celularDoctor) {
+    public void setCelularDoctor(String celularDoctor) {
         this.celularDoctor = celularDoctor;
     }
 
