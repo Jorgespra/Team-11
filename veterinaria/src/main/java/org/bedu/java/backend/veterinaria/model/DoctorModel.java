@@ -2,7 +2,7 @@ package org.bedu.java.backend.veterinaria.model;
 
 public class DoctorModel {
 
-    private long id;
+    private Long id;
     private String nombreDoctor;
     private String apellidoDoctor;
     private String fecha_nacimientoDoctor;
@@ -12,7 +12,7 @@ public class DoctorModel {
     private String hora_entradaDoctor;
     private String hora_salidaDoctor;
 
-    public DoctorModel(long id, String nombreDoctor, String apellidoDoctor, String fecha_nacimientoDoctor,
+    public DoctorModel(Long id, String nombreDoctor, String apellidoDoctor, String fecha_nacimientoDoctor,
             long celularDoctor, String correoDoctor, String especialidadDoctor, String hora_entradaDoctor,
             String hora_salidaDoctor) {
         this.id = id;
@@ -26,11 +26,11 @@ public class DoctorModel {
         this.hora_salidaDoctor = hora_salidaDoctor;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
