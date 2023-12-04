@@ -2,40 +2,30 @@ package org.bedu.java.backend.veterinaria.dto;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import lombok.Data;
 
+/*
+ * @Data es la unión de:
+ *  - @Getter
+ *  - @Setter
+ *  - @ToString
+ *  - @EqualsAndHashCode <-- Podría tener conflictos con otras librerias, por ejemplo JPA
+ *  - @RequiredArgsConstructor
+ */
+@Data
 public class CreateMascotaDTO {
-    @NotBlank
+
+    // private int id;
+
+    @NotBlank(message = "El nombre de la mascota es obligatorio")
     private String nombre;
-    @NotBlank
+
+    @NotBlank(message = "El nombre de la especie es obligatorio")
     private String especie;
-    @NotBlank
+
+    @NotBlank(message = "El nombre de la raza es obligatorio")
     private String raza;
-    @Min(1)
+
+    @Min(value = 1, message = "La edad debe ser mayor a cero")
     private int edad;
-
-    public String getNombre() {
-        return nombre;
-    }
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-    public String getEspecie() {
-        return especie;
-    }
-    public void setEspecie(String especie) {
-        this.especie = especie;
-    }
-    public String getRaza() {
-        return raza;
-    }
-    public void setRaza(String raza) {
-        this.raza = raza;
-    }
-    public int getEdad() {
-        return edad;
-    }
-    public void setEdad(int edad) {
-        this.edad = edad;
-    }
-
 }
