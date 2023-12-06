@@ -7,18 +7,59 @@ import org.bedu.java.backend.veterinaria.dto.HistorialMedicoDto;
 import org.bedu.java.backend.veterinaria.exception.ResourceNotFoundException;
 import org.bedu.java.backend.veterinaria.mapper.AutoHistorialMedicoMapper;
 import org.bedu.java.backend.veterinaria.model.HistorialMedico;
+import org.bedu.java.backend.veterinaria.model.Mascota;
+import org.bedu.java.backend.veterinaria.model.Veterinario;
 import org.bedu.java.backend.veterinaria.repository.HistorialMedicoRepository;
+import org.bedu.java.backend.veterinaria.repository.MascotaRepository;
+import org.bedu.java.backend.veterinaria.repository.VeterinarioRepository;
 import org.bedu.java.backend.veterinaria.service.HistorialMedicoService;
 import org.springframework.stereotype.Service;
 
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 
 @Service
 @AllArgsConstructor
 public class HistorialMedicoImpl implements HistorialMedicoService {
     private HistorialMedicoRepository historialMedicoRepository;
+    private VeterinarioRepository veterinarioRepository;
+    private MascotaRepository mascotaRepository;
+
+    @Override
+    @Transactional
+    public HistorialMedicoDto createHistorialMedico(HistorialMedicoDto historialMedicoDto) {
+        HistorialMedico historialMedico = AutoHistorialMedicoMapper.MAPPER.mapToHistorialMedico(historialMedicoDto);
+
+        // Obtener el Veterinario de la base de datos o guardarlo si es nuevo
+        Veterinario doctor = historialMedico.getDoctor();
+        if (doctor != null && doctor.getId() != null) {
+            doctor = veterinarioRepository.findById(doctor.getId())
+                    .orElseThrow(() -> new ResourceNotFoundException("Veterinario", "id", historialMedico.getDoctor().getId()));
+        } else {
+            doctor = veterinarioRepository.save(doctor);
+        }
+
+        // Obtener la Mascota de la base de datos o guardarla si es nueva
+        Mascota mascota = historialMedico.getMascota();
+        if (mascota != null && mascota.getId() != null) {
+            mascota = mascotaRepository.findById(mascota.getId())
+                    .orElseThrow(() -> new ResourceNotFoundException("Mascota", "id", historialMedico.getMascota().getId()));
+        } else {
+            mascota = mascotaRepository.save(mascota);
+        }
+
+        // Asignar el Veterinario y la Mascota al HistorialMedico
+        historialMedico.setDoctor(doctor);
+        historialMedico.setMascota(mascota);
+
+        HistorialMedico savedHistorialMedico = historialMedicoRepository.save(historialMedico);
+
+        return AutoHistorialMedicoMapper.MAPPER.mapToHistorialMedicoDto(savedHistorialMedico);
+    }
+
     
     
+   /*
     @Override
     public HistorialMedicoDto createHistorialMedico(HistorialMedicoDto historialMedicoDto) {
         HistorialMedico historialMedico = AutoHistorialMedicoMapper.MAPPER.mapToHistorialMedico(historialMedicoDto);
@@ -29,6 +70,7 @@ public class HistorialMedicoImpl implements HistorialMedicoService {
        
         return savedHistorialMedicoDto;
     }
+    */ 
 
     @Override
     public HistorialMedicoDto getHistorialMedicoById(Long historialMedicoId) {
