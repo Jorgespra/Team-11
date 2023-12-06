@@ -1,5 +1,6 @@
 package org.bedu.java.backend.veterinaria.model;
 
+import java.util.LinkedList;
 import java.util.List;
 
 // import lombok.AllArgsConstructor;
@@ -10,20 +11,20 @@ import java.util.List;
 
 import org.hibernate.validator.constraints.Range;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 // import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 // import jakarta.persistence.JoinColumn;
 // import jakarta.persistence.JoinColumns;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.DecimalMin;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -31,7 +32,6 @@ import lombok.ToString;
 @Setter
 @ToString
 @Entity
-@NoArgsConstructor
 @Table(name = "facturas")
 public class Factura {
 
@@ -53,9 +53,11 @@ public class Factura {
 	// 	@JoinColumn(name="MEDICAMENTO_ID",referencedColumnName="id")
 	// })
     // @JoinColumn(name = Medicamento.id)
-    @OneToMany(mappedBy = "factura")
-    private List<Medicamento> medicamentos;
-
+/* 
+    public Factura(){
+        this.medicamentos =  new LinkedList<Medicamento>();
+    }
+*/
     @DecimalMin("0.01")
     @DecimalMax("9999999.99")
     private double costo;

@@ -4,10 +4,13 @@ import java.util.List;
 
 import org.bedu.java.backend.veterinaria.dto.CreateFacturaDTO;
 import org.bedu.java.backend.veterinaria.dto.FacturaDTO;
+import org.bedu.java.backend.veterinaria.dto.FacturaMedicamentoDTO;
+import org.bedu.java.backend.veterinaria.service.FacturaMedicamentoService;
 import org.bedu.java.backend.veterinaria.service.FacturaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,17 +24,20 @@ import jakarta.validation.Valid;
 // @Slf4j
 @RequestMapping("/facturas")
 public class FacturaController {
-    
+
     @Autowired
     // private FacturaService facturaService;
     private FacturaService service;
+
+    @Autowired
+    private FacturaMedicamentoService fMedicamento;
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<FacturaDTO> findAll() {
         return service.findAll();
-    // public List<FacturaDTO> getAll() {
-    //     return facturaService.getAll();
+        // public List<FacturaDTO> getAll() {
+        // return facturaService.getAll();
     }
 
     @PostMapping
@@ -40,10 +46,10 @@ public class FacturaController {
         return service.save(data);
     }
 
-
-/*     public FacturaDTO save(@Valid @RequestBody CreateFacturaDTO data) {
-        log.info("Ejecutando guardado de una factura");
-        log.info(data.toString());
-        return facturaService.save(data);
+    @PostMapping("{facturaId}/medicamento")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void addMedicamentoFactura(@PathVariable(name = "facturaId") long facturaId, @RequestBody FacturaMedicamentoDTO data) {
+        fMedicamento.addMedicamento(facturaId, data.getMedicamentoId());
     }
- */}
+
+}

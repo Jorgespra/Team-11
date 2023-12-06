@@ -18,7 +18,6 @@ public class FacturaService {
 
     @Autowired
     private FacturaMapper mapper;
-    // private FacturaRepository facturaRepository;
 
     public List<FacturaDTO> findAll() {
         return repository
@@ -26,14 +25,10 @@ public class FacturaService {
             .stream()
             .map(mapper::toDTO)
             .toList();
-
     }
 
     public FacturaDTO save(CreateFacturaDTO data) {
-        Factura entity = repository
-            .save(mapper.toModel(data));
-        
+        Factura entity = repository.save(mapper.toModel(data));    
         return mapper.toDTO(entity);
     }
-
 }
