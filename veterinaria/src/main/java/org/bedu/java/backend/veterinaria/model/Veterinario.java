@@ -33,7 +33,7 @@ public class Veterinario {
     @Column(name = "fecha_nacimiento", nullable = false)
     private Date fechaNacimiento;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 13)
     private String celular;
 
     @Column(nullable = false, length = 100)
