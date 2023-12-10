@@ -28,4 +28,8 @@ public class FacturaMedicamento {
     @JoinColumn(name = "medicamento_id")
     private Medicamento medicamento;
 
+    private double precio;
+
+    private int cantidad;
+
 }

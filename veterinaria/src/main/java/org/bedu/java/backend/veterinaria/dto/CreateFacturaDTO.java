@@ -1,11 +1,8 @@
 package org.bedu.java.backend.veterinaria.dto;
 
-import java.util.List;
-
-import org.bedu.java.backend.veterinaria.model.Medicamento;
 
 import jakarta.validation.constraints.DecimalMin;
-import jakarta.validation.constraints.Min;
+
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
@@ -22,16 +19,18 @@ public class CreateFacturaDTO {
 
     // private int id;
 
+    @DecimalMin(value = "0.01", message = "El sub Total debe ser mayor o igual que 0.01")
+    private double sub_total;
+
+
+    @DecimalMin(value = "0.01", message = "El IVA debe ser mayor o igual que 0.01")
+    private double iva;
+
+    
     @NotBlank(message = "Se debe incluir descripcion del servicio")
-    private String servicio;
+    private String rfc_cliente;
 
-    @NotBlank(message = "Falta incluir detalles del producto o servicio")
-    private String detalle;
-
-    @Min(value = 1, message = "La edad debe ser mayor a cero")
-    private int cantidad;
-
-    @DecimalMin(value = "0.01", message = "El costo debe ser mayor o igual que 0.01")
-    private double costo;
+    @NotBlank(message = "Se debe incluir descripcion del servicio")
+    private String razon_social;
 
 }

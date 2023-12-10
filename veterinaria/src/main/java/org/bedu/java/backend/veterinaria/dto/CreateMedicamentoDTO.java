@@ -2,10 +2,7 @@ package org.bedu.java.backend.veterinaria.dto;
 
 import jakarta.validation.constraints.*;
 import lombok.Data;
-
 import java.util.Date;
-
-import org.bedu.java.backend.veterinaria.model.Factura;
 
 @Data
 public class CreateMedicamentoDTO {
@@ -29,7 +26,5 @@ public class CreateMedicamentoDTO {
 
     @NotBlank(message = "Las instrucciones de uso del medicamento son obligatorias")
     private String instruccionesUso;
-
-    private Factura factura;
 
 }

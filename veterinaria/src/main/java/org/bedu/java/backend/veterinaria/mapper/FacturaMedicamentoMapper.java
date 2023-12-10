@@ -12,5 +12,5 @@ public interface FacturaMedicamentoMapper {
     @Mapping(source = "facturaId", target = "factura.id")
     @Mapping(source = "medicamentoId", target = "id.medicamentoId")
     @Mapping(source = "medicamentoId", target = "medicamento.id")
-    FacturaMedicamento toModel(Long facturaId, Long medicamentoId);
+    FacturaMedicamento toModel(Long facturaId, Long medicamentoId,double precio, int cantidad);
 }
