@@ -1,9 +1,11 @@
 package org.bedu.java.backend.veterinaria.service;
-// import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 import org.bedu.java.backend.veterinaria.dto.CreateMascotaDTO;
 import org.bedu.java.backend.veterinaria.dto.MascotaDTO;
+import org.bedu.java.backend.veterinaria.dto.UpdateMascotaDTO;
+import org.bedu.java.backend.veterinaria.exception.MascotaNotFoundException;
 import org.bedu.java.backend.veterinaria.mapper.MascotaMapper;
 import org.bedu.java.backend.veterinaria.model.Mascota;
 import org.bedu.java.backend.veterinaria.repository.MascotaRepository;
@@ -18,9 +20,12 @@ public class MascotaService {
 
     @Autowired
     private MascotaMapper mapper;
-    // private MascotaRepository mascotaRepository;
 
     public List<MascotaDTO> findAll() {
+        return mapper.toDTO(repository.findAll());
+    }
+
+/*     public List<MascotaDTO> findAll() {
         return repository
             .findAll()
             .stream()
@@ -28,6 +33,7 @@ public class MascotaService {
             .toList();
 
     }
+ */
 
     public MascotaDTO save(CreateMascotaDTO data) {
         Mascota entity = repository
@@ -36,33 +42,30 @@ public class MascotaService {
         return mapper.toDTO(entity);
     }
 
-/*     public List<MascotaDTO> getAll() {
-        List<Mascota> mascotas = mascotaRepository.getAll();
+/*     public Optional<MascotaDTO> findById(Long id) {
+        return repository
+            .findById(id)
+            .map(mapper::toDTO);
+    }
+ */
 
-        List<MascotaDTO> data = new LinkedList<>();
-        
-        for (Mascota mascota : mascotas) {
-            data.add(toDTO(mascota));
+    public void update(long mascotaId, UpdateMascotaDTO data) throws MascotaNotFoundException {
+        Optional<Mascota> result = repository.findById(mascotaId);
+
+        if (!result.isPresent()) {
+            throw new MascotaNotFoundException(mascotaId);
         }
 
-        return data;
-    }
- */
-/*     public MascotaDTO save(CreateMascotaDTO data) {
-        Mascota model = toModel(data);
-        return toDTO(mascotaRepository.save(model));
-    }
- */
-/*     private Mascota toModel(CreateMascotaDTO dto) {
-        return new Mascota(0, dto.getNombre(), dto.getEspecie(), dto.getRaza(), dto.getEdad());
+        Mascota mascota = result.get();
+
+        // Aplicar los cambios a la mascota
+        mapper.update(mascota, data);
+
+        repository.save(mascota);
     }
 
-    private Mascota toModel(MascotaDTO dto) {
-        return new Mascota(dto.getId(), dto.getNombre(), dto.getEspecie(), dto.getRaza(), dto.getEdad());
+    public void deleteById(Long id) {
+        repository.deleteById(id);
     }
 
-    private MascotaDTO toDTO(Mascota model) {
-        return new MascotaDTO(model.getId(), model.getNombre(), model.getEspecie(), model.getRaza(), model.getEdad());
-    }
- */
 }

@@ -1,15 +1,16 @@
 package org.bedu.java.backend.veterinaria.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.AllArgsConstructor;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
-// @AllArgsConstructor
-public class MascotaDTO {
-    private long id;
+public class UpdateMascotaDTO {
+    
+    // private long id;
 
     @Schema(description = "Nombre de la mascota", example = "Rex")
+    @NotBlank
     private String nombre;
 
     @Schema(description = "Nombre de la especie", example = "Perico")
