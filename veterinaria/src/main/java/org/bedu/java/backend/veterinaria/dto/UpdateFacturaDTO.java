@@ -9,6 +9,8 @@ public class UpdateFacturaDTO {
 
     private double iva;
 
+    private double total;
+
     private String rfc_cliente;
 
     private String razon_social;

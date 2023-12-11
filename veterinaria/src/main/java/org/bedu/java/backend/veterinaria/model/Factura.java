@@ -38,9 +38,10 @@ public class Factura {
     private double sub_total;
 
     @DecimalMin("0.01")
-    @DecimalMax("100.00")
+    @DecimalMax("100.00") // TODO: ¿Por qué un limite para el IVA?
     private double iva;
 
+    @DecimalMin("0.01")
     private double total;
     // @JoinColumns({
     // @JoinColumn(name="MEDICAMENTO_ID",referencedColumnName="id")

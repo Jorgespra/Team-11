@@ -26,6 +26,8 @@ public class CreateFacturaDTO {
     @DecimalMin(value = "0.01", message = "El IVA debe ser mayor o igual que 0.01")
     private double iva;
 
+    @DecimalMin(value = "0.01", message = "El Total debe ser mayor o igual que 0.01")
+    private double total;
     
     @NotBlank(message = "Se debe incluir descripcion del servicio")
     private String rfc_cliente;

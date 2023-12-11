@@ -19,13 +19,9 @@ public interface MedicamentoMapper {
     List<MedicamentoDTO> toDTO(List<Medicamento> model);
 
     @Mapping(target = "id", ignore = true)
-    @Mapping(source = "caducidad", target="fechaCaducidad")
-    @Mapping(source = "instrucciones", target="instruccionesUso")
     Medicamento toModel(CreateMedicamentoDTO dto);
 
     @Mapping(target = "id", ignore = true)
-    @Mapping(source = "caducidad", target="fechaCaducidad")
-    @Mapping(source = "instrucciones", target="instruccionesUso")
     void update(@MappingTarget Medicamento medicamento, UpdateMedicamentoDTO data);
 
 }

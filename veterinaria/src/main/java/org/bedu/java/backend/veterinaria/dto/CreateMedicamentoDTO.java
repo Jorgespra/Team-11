@@ -25,7 +25,7 @@ public class CreateMedicamentoDTO {
     @Schema(description = "Fecha en la que caduca el medicamento", example = "2025-01-01")
     @NotNull(message = "La fecha de caducidad del medicamento no puede ser nula")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate caducidad; //se cambió a fechaCaducidad a caducidad
+    private LocalDate fechaCaducidad;
 
     @Schema(description = "Cantidad de medicamentos en existencia", example = "100")
     @Min(value = 1, message = "La cantidad o existencia del medicamento debe ser mayor o igual que 1")
