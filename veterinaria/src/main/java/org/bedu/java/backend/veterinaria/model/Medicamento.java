@@ -29,11 +29,11 @@ public class Medicamento {
     @Column(name = "fecha_caducidad", nullable = false)
     private Date fechaCaducidad;
 
-    @Column
+    @Column(nullable = false)
     @Range(min = 0)
     private int existencia;
 
-    @Column
+    @Column(nullable = false)
     @Range(min = 1)
     private float precio;
 

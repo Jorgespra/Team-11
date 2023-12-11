@@ -1,15 +1,17 @@
 package org.bedu.java.backend.veterinaria.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
 @Data
-public class CreateMedicamentoDTO {
-
+public class UpdateMedicamentoDTO {
     @Schema(description = "Nombre del medicamento", example = "Doxiciclina")
     @NotBlank(message = "El nombre del medicamento es obligatorio")
     private String nombre;
@@ -25,7 +27,7 @@ public class CreateMedicamentoDTO {
     @Schema(description = "Fecha en la que caduca el medicamento", example = "2025-01-01")
     @NotNull(message = "La fecha de caducidad del medicamento no puede ser nula")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate caducidad; //se cambió a fechaCaducidad a caducidad
+    private LocalDate caducidad; //se cambió a caducidad
 
     @Schema(description = "Cantidad de medicamentos en existencia", example = "100")
     @Min(value = 1, message = "La cantidad o existencia del medicamento debe ser mayor o igual que 1")
