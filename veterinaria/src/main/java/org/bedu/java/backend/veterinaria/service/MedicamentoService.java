@@ -44,8 +44,15 @@ public class MedicamentoService {
         repository.save(medicamento);
     }
 
-    public void deleteById(Long id) {
-        repository.deleteById(id);
+    public void deleteById(Long medicamentoId) throws MedicamentoNotFoundException {
+
+        Optional<Medicamento> result = repository.findById(medicamentoId);
+
+        if(!result.isPresent()) {
+            throw new MedicamentoNotFoundException(medicamentoId);
+        }
+
+        repository.deleteById(medicamentoId);
     }
 
 }

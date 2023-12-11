@@ -47,10 +47,10 @@ public class MedicamentoController {
     }
 
     @Operation(summary = "Elimina un medicamento existente")
-    @DeleteMapping("{id}")
+    @DeleteMapping("{medicamentoId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteById(@PathVariable Long id) {
-        service.deleteById(id);
+    public void deleteById(@PathVariable long medicamentoId) throws MedicamentoNotFoundException {
+        service.deleteById(medicamentoId);
     }
 
 }
