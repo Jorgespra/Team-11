@@ -15,7 +15,6 @@ import org.bedu.java.backend.veterinaria.repository.VeterinarioRepository;
 import org.bedu.java.backend.veterinaria.service.HistorialMedicoService;
 import org.springframework.stereotype.Service;
 
-import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 
 @Service
@@ -26,7 +25,6 @@ public class HistorialMedicoImpl implements HistorialMedicoService {
     private MascotaRepository mascotaRepository;
 
     @Override
-    @Transactional
     public HistorialMedicoDto createHistorialMedico(HistorialMedicoDto historialMedicoDto) {
         HistorialMedico historialMedico = AutoHistorialMedicoMapper.MAPPER.mapToHistorialMedico(historialMedicoDto);
 
@@ -55,29 +53,6 @@ public class HistorialMedicoImpl implements HistorialMedicoService {
         HistorialMedico savedHistorialMedico = historialMedicoRepository.save(historialMedico);
 
         return AutoHistorialMedicoMapper.MAPPER.mapToHistorialMedicoDto(savedHistorialMedico);
-    }
-
-    
-    
-   /*
-    @Override
-    public HistorialMedicoDto createHistorialMedico(HistorialMedicoDto historialMedicoDto) {
-        HistorialMedico historialMedico = AutoHistorialMedicoMapper.MAPPER.mapToHistorialMedico(historialMedicoDto);
-        
-        HistorialMedico savedHistorialMedico = historialMedicoRepository.save(historialMedico);
-
-        HistorialMedicoDto savedHistorialMedicoDto = AutoHistorialMedicoMapper.MAPPER.mapToHistorialMedicoDto(savedHistorialMedico);
-       
-        return savedHistorialMedicoDto;
-    }
-    */ 
-
-    @Override
-    public HistorialMedicoDto getHistorialMedicoById(Long historialMedicoId) {
-         HistorialMedico historialMedico = historialMedicoRepository.findById(historialMedicoId).orElseThrow(
-                () -> new ResourceNotFoundException("User", "id", historialMedicoId)
-        );
-        return AutoHistorialMedicoMapper.MAPPER.mapToHistorialMedicoDto(historialMedico);
     }
 
     @Override
@@ -115,49 +90,27 @@ public class HistorialMedicoImpl implements HistorialMedicoService {
         historialMedicoRepository.deleteById(historialMedicoId);
     }
 
-    /*private List<HistorialMedico> historiales = new ArrayList<>();
-
-    // Obtener todos los historiales médicos
-    public List<HistorialMedico> obtenerTodosHistoriales() {
-        return historiales;
+    @Override
+    public HistorialMedicoDto getHistorialMedicoById(Long historialMedicoId) {
+         HistorialMedico historialMedico = historialMedicoRepository.findById(historialMedicoId).orElseThrow(
+                () -> new ResourceNotFoundException("User", "id", historialMedicoId)
+        );
+        return AutoHistorialMedicoMapper.MAPPER.mapToHistorialMedicoDto(historialMedico);
     }
 
-    // Obtener un historial médico por ID
-    public HistorialMedico obtenerHistorialPorId(long id) {
-        Optional<HistorialMedico> historialEncontrado = historiales.stream()
-                .filter(h -> h.getId() == id)
-                .findFirst();
-        return historialEncontrado.orElse(null);
+    @Override
+    public List<HistorialMedicoDto> getHistorialesByMascotaId(Long mascotaId) {
+        List<HistorialMedico> historiales = historialMedicoRepository.findByMascotaId(mascotaId);
+        return historiales.stream()
+                .map(AutoHistorialMedicoMapper.MAPPER::mapToHistorialMedicoDto)
+                .collect(Collectors.toList());
     }
 
-    // Crear un nuevo historial médico
-    public HistorialMedico crearHistorial(HistorialMedico historial) {
-        historial.setId(generarNuevoId());
-        historiales.add(historial);
-        return historial;
+    @Override
+    public List<HistorialMedicoDto> getHistorialesByVeterinarioId(Long veterinarioId) {
+        List<HistorialMedico> historiales = historialMedicoRepository.findByDoctorId(veterinarioId);
+        return historiales.stream()
+                .map(AutoHistorialMedicoMapper.MAPPER::mapToHistorialMedicoDto)
+                .collect(Collectors.toList());
     }
-
-    // Actualizar un historial médico existente
-    public HistorialMedico actualizarHistorial(long id, HistorialMedico historialActualizado) {
-        for (int i = 0; i < historiales.size(); i++) {
-            if (historiales.get(i).getId() == id) {
-                historiales.set(i, historialActualizado);
-                return historialActualizado;
-            }
-        }
-        return null;
-    }
-
-    // Eliminar un historial médico por ID
-    public boolean eliminarHistorial(long id) {
-        return historiales.removeIf(h -> h.getId() == id);
-    }
-
-    // Método auxiliar para generar un nuevo ID (puedes ajustarlo según tus necesidades)
-    private long generarNuevoId() {
-        return System.currentTimeMillis(); // En este ejemplo, usamos la marca de tiempo actual como ID
-    }
-    */
-
-
 }

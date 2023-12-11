@@ -7,12 +7,16 @@ import java.util.List;
 public interface HistorialMedicoService {
     HistorialMedicoDto createHistorialMedico(HistorialMedicoDto historialMedico);
 
-    HistorialMedicoDto getHistorialMedicoById(Long historialMedicoId);
-
-    List<HistorialMedicoDto> getAllHistorialMedico();
-
     HistorialMedicoDto updateHistorialMedico(HistorialMedicoDto historialMedico);
 
     void deleteHistorialMedico(Long historialMedicoId);
+
+    List<HistorialMedicoDto> getAllHistorialMedico();
+    
+    HistorialMedicoDto getHistorialMedicoById(Long historialMedicoId);
+
+    List<HistorialMedicoDto> getHistorialesByMascotaId(Long mascotaId);
+
+    List<HistorialMedicoDto> getHistorialesByVeterinarioId(Long veterinarioId);
 
 }

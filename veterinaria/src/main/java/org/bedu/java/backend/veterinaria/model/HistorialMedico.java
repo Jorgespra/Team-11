@@ -24,17 +24,17 @@ import lombok.Setter;
 @Table(name = "historial")
 public class HistorialMedico {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "veterinario_id")
     private Veterinario doctor;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "mascota_id")
     private Mascota mascota;
-    
+
     @Column(nullable = false)
     private LocalDate fechaConsulta;
     
@@ -52,6 +52,5 @@ public class HistorialMedico {
     
     @Column(nullable = true)
     private String observaciones;
-
 
 }
