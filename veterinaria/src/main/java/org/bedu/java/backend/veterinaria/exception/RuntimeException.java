@@ -15,4 +15,8 @@ public class RuntimeException extends Exception {
         this.code = code;
         this.details = details;
     }
+
+    public RuntimeException(String message) {
+        super(message);
+    }
 }

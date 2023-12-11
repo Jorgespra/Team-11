@@ -1,7 +1,6 @@
 package org.bedu.java.backend.veterinaria.model;
 
 import org.hibernate.validator.constraints.Range;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -18,7 +17,6 @@ import lombok.ToString;
 @ToString
 @Entity
 @Table(name = "mascota")
-
 public class Mascota {
 
     @Id

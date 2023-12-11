@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MascotaRepository extends CrudRepository<Mascota, Long> {
-
+    
     List<Mascota> findAll();
 }
