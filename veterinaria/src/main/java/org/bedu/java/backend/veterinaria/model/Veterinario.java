@@ -5,7 +5,10 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.time.LocalTime;
 import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Getter
 @Setter
@@ -16,7 +19,7 @@ public class Veterinario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private long id;
 
     @Column(nullable = false, length = 100)
     private String nombre;
@@ -30,8 +33,8 @@ public class Veterinario {
     @Column(name = "fecha_nacimiento", nullable = false)
     private Date fechaNacimiento;
 
-    @Column(nullable = false)
-    private long celular;
+    @Column(nullable = false, length = 13)
+    private String celular;
 
     @Column(nullable = false, length = 100)
     private String correo;
@@ -39,11 +42,14 @@ public class Veterinario {
     @Column(nullable = false, length = 100)
     private String especialidad;
 
-    @Column(nullable = false, length = 100)
-    private String horaEntrada;
+    @Column(name="hora_entrada", nullable = false)
+    @DateTimeFormat(pattern = "HH:mm")
+    private LocalTime horaEntrada;
 
-    @Column(nullable = false, length = 100)
-    private String horaSalida;
+    @Column(name = "hora_salida", nullable = false)
+    @DateTimeFormat(pattern = "HH:mm")
+    private LocalTime horaSalida;
+
 
 }
 
