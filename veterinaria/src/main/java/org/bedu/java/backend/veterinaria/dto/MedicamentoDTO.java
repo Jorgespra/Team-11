@@ -6,7 +6,10 @@ import lombok.Data;
 
 import java.time.LocalDate;
 
+import org.bedu.java.backend.veterinaria.model.Factura;
+
 @Data
+@AllArgsConstructor
 public class MedicamentoDTO {
 
     @Schema(description = "Identificador del medicamento", example = "100")
@@ -32,5 +35,5 @@ public class MedicamentoDTO {
 
     @Schema(description = "Instrucciones de uso del medicamento", example = "Por lo general, se administra de 2 a 5 mg por kg de peso corporal cada 12 o 24 horas.")
     private String instruccionesUso;
-
+    private Factura factura;
 }

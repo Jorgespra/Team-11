@@ -37,5 +37,6 @@ public class CreateMedicamentoDTO {
 
     @Schema(description = "Instrucciones de uso del medicamento", example = "Por lo general, se administra de 2 a 5 mg por kg de peso corporal cada 12 o 24 horas.")
     @NotBlank(message = "Las instrucciones de uso del medicamento son obligatorias")
-    private String instrucciones; //se cambió a instruccionesUso a instrucciones
+    private String instruccionesUso;
+
 }
