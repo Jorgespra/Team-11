@@ -41,15 +41,17 @@ public class FacturaService {
     public void update( long facturaId ,UpdateFacturaDTO data) throws FacturaNotFound {
         Optional<Factura> temp = repository.findById(facturaId);
         double total = 0;
-
         if (!temp.isPresent()) {
             throw new FacturaNotFound(facturaId);
-        }
-        
+        }        
         Factura factura = temp.get();
-         total = (data.getIva() * data.getSub_total()) + data.getSub_total();
+        total = (data.getIva() * data.getSub_total()) + data.getSub_total();
         factura.setTotal(total);
         mapper.update(factura, data);       
         repository.save(factura);
+    }
+
+    public void deleteById(long facturaId){
+        repository.deleteById(facturaId);
     }
 }
