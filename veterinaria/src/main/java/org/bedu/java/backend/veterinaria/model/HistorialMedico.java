@@ -24,7 +24,7 @@ import lombok.Setter;
 public class HistorialMedico {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private long id;
 
     @ManyToOne
     @JoinColumn(name = "veterinario_id")
