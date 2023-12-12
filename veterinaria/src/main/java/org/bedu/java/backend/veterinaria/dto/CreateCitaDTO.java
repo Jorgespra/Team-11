@@ -1,48 +1,23 @@
 package org.bedu.java.backend.veterinaria.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotBlank;
+import lombok.*;
 
-import java.sql.Time;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
+@Data
 public class CreateCitaDTO {
-    private String vetName;
-    private String petName;
-    private String dueAppointment;
-    private Date dayAppointment;
-    private Time hourAppointmet;
 
-
-    public String getVetName() {
-        return vetName;
-    }
-    public void setVetName(String vetName) {
-        this.vetName = vetName;
-    }
-    public String getPetName() {
-        return petName;
-    }
-    public void setPetName(String petName) {
-        this.petName = petName;
-    }
-    public String getDueAppointment() {
-        return dueAppointment;
-    }
-    public void setDueAppointment(String dueAppointment) {
-        this.dueAppointment = dueAppointment;
-    }
-    public Date getDayAppointment() {
-        return dayAppointment;
-    }
-    public void setDayAppointment(Date dayAppointment) {
-        this.dayAppointment = dayAppointment;
-    }
-    public Time getHourAppointmet() {
-        return hourAppointmet;
-    }
-    public void setHourAppointmet(Time hourAppointmet) {
-        this.hourAppointmet = hourAppointmet;
-    }
-
-    
+    @Schema(description = "Motivo de la consulta", example = "Estetica, Urgencia, etc.")
+    @NotBlank
+    private String motivoDelaConsulta;
+    @Schema(description = "Fecha de la consulta", example = "dd/mm/aaaa")
+    @NotBlank
+    private LocalDate fechaConsulta;
+    @Schema(description = "Hora agendada", example = "hh:mm")
+    @NotBlank
+    private LocalTime hora;
 
 }

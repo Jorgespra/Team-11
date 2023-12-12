@@ -2,38 +2,57 @@ package org.bedu.java.backend.veterinaria.service;
 
 import org.bedu.java.backend.veterinaria.dto.CreateMedicamentoDTO;
 import org.bedu.java.backend.veterinaria.dto.MedicamentoDTO;
+import org.bedu.java.backend.veterinaria.dto.UpdateMedicamentoDTO;
+import org.bedu.java.backend.veterinaria.exception.MedicamentoNotFoundException;
+import org.bedu.java.backend.veterinaria.mapper.MedicamentoMapper;
 import org.bedu.java.backend.veterinaria.model.Medicamento;
 import org.bedu.java.backend.veterinaria.repository.MedicamentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MedicamentoService {
 
     @Autowired
-    private MedicamentoRepository medicamentoRepository;
+    private MedicamentoRepository repository;
 
-    public List<MedicamentoDTO> getAll() {
-        List<Medicamento> medicamentos = medicamentoRepository.getAll();
-        return medicamentos.stream().map(x -> toDTO(x)).toList();
+    @Autowired
+    private MedicamentoMapper mapper;
+
+    public List<MedicamentoDTO> findAll() {
+        return mapper.toDTO(repository.findAll());
     }
 
     public MedicamentoDTO save(CreateMedicamentoDTO data) {
-        Medicamento model = toModel(data);
-        return toDTO(medicamentoRepository.save(model));
+        Medicamento entity = repository
+                .save(mapper.toModel(data));
+        return  mapper.toDTO(entity);
     }
 
-    private Medicamento toModel(CreateMedicamentoDTO dto) {
-        return new Medicamento(0, dto.getNombre(), dto.getClasificacion(), dto.getDescripcion(), dto.getFechaCaducidad(), dto.getExistencia(), dto.getPrecio(), dto.getInstruccionesUso());
-    }
-    private Medicamento toModel(MedicamentoDTO dto) {
-        return new Medicamento(dto.getId(), dto.getNombre(), dto.getClasificacion(), dto.getDescripcion(), dto.getFechaCaducidad(), dto.getExistencia(), dto.getPrecio(), dto.getInstruccionesUso());
+    public void update(long medicamentoId, UpdateMedicamentoDTO data) throws MedicamentoNotFoundException {
+        Optional<Medicamento> result = repository.findById(medicamentoId);
+
+        if(!result.isPresent()) {
+            throw new MedicamentoNotFoundException(medicamentoId);
+        }
+
+        Medicamento medicamento = result.get();
+        mapper.update(medicamento, data);
+        repository.save(medicamento);
     }
 
-    private MedicamentoDTO toDTO(Medicamento model) {
-        return new MedicamentoDTO(model.getId(), model.getNombre(), model.getClasificacion(), model.getDescripcion(), model.getFechaCaducidad(), model.getExistencia(), model.getPrecio(), model.getInstruccionesUso());
+    public void deleteById(Long medicamentoId) throws MedicamentoNotFoundException {
+
+        Optional<Medicamento> result = repository.findById(medicamentoId);
+
+        if(!result.isPresent()) {
+            throw new MedicamentoNotFoundException(medicamentoId);
+        }
+
+        repository.deleteById(medicamentoId);
     }
 
 }

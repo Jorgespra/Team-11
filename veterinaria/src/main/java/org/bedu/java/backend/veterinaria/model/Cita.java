@@ -1,76 +1,30 @@
 package org.bedu.java.backend.veterinaria.model;
 
-import java.sql.Time;
-import java.util.Date;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+
+@Getter
+@Setter
+@ToString
+@Entity
+@Table(name = "citas")
 
 public class Cita {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    private String vetName;
-    private String petName;
-    private String dueAppointment;
-    private Date dayAppointment;
-    private Time hourAppointmet;
 
-    public Cita(long id, String vetName, String petName, String dueAppointment, Date dayAppointment,
-            Time hourAppointmet) {
-        this.id = id;
-        this.vetName = vetName;
-        this.petName = petName;
-        this.dueAppointment = dueAppointment;
-        this.dayAppointment = dayAppointment;
-        this.hourAppointmet = hourAppointmet;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getVetName() {
-        return vetName;
-    }
-
-    public void setVetName(String vetName) {
-        this.vetName = vetName;
-    }
-
-    public String getPetName() {
-        return petName;
-    }
-
-    public void setPetName(String petName) {
-        this.petName = petName;
-    }
-
-    public String getDueAppointment() {
-        return dueAppointment;
-    }
-
-    public void setDueAppointment(String dueAppointment) {
-        this.dueAppointment = dueAppointment;
-    }
-
-    public Date getDayAppointment() {
-        return dayAppointment;
-    }
-
-    public void setDayAppointment(Date dayAppointment) {
-        this.dayAppointment = dayAppointment;
-    }
-
-    public Time getHourAppointmet() {
-        return hourAppointmet;
-    }
-
-    public void setHourAppointmet(Time hourAppointmet) {
-        this.hourAppointmet = hourAppointmet;
-    }
-    
-
-    
+    @Column(nullable = false, length = 200)
+    private MotivoCita motivoDelaConsulta;
+    @Column (nullable = false)
+    private LocalDate fechaConsulta;
+    @Column (nullable = false)
+    private LocalTime hora;
 
 }

@@ -1,58 +1,17 @@
 package org.bedu.java.backend.veterinaria.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+@Data
+@AllArgsConstructor
 public class FacturaDTO {
+
     private long id;
-    private String detalles;
-    private String servicios;
-    private String medicamentos;
-    private double costo;
-
-    public FacturaDTO(long id, String detalles, String servicios, String medicamentos, double costo) {
-        this.id = id;
-        this.detalles = detalles;
-        this.servicios = servicios;
-        this.medicamentos = medicamentos;
-        this.costo = costo;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getDetalles() {
-        return detalles;
-    }
-
-    public void setDetalles(String detalles) {
-        this.detalles = detalles;
-    }
-
-    public String getServicios() {
-        return servicios;
-    }
-
-    public void setServicios(String servicios) {
-        this.servicios = servicios;
-    }
-
-    public String getMedicamentos() {
-        return medicamentos;
-    }
-
-    public void setMedicamentos(String medicamentos) {
-        this.medicamentos = medicamentos;
-    }
-
-    public double getCosto() {
-        return costo;
-    }
-
-    public void setCosto(double costo) {
-        this.costo = costo;
-    }
+    private double sub_total;
+    private double iva;
+    private double total;
+    private String rfc_cliente;
+    private String razon_social;
 
 }

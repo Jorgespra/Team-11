@@ -1,89 +1,37 @@
 package org.bedu.java.backend.veterinaria.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
 import java.util.Date;
 
+@Data
+@AllArgsConstructor
 public class MedicamentoDTO {
+
+    @Schema(description = "Identificador del medicamento", example = "100")
     private long id;
+
+    @Schema(description = "Nombre del medicamento", example = "Doxiciclina")
     private String nombre;
+
+    @Schema(description = "Clasificación o tipo de medicamento", example = "Antibióticos")
     private String clasificacion;
+
+    @Schema(description = "Descripción del medicamento", example = "Útil para tratar enfermedades transmitidas por garrapatas y enfermedades respiratorias.")
     private String descripcion;
+
+    @Schema(description = "Fecha en la que caduca el medicamento", example = "2025-01-01")
     private Date fechaCaducidad;
+
+    @Schema(description = "Cantidad de medicamentos en existencia", example = "100")
     private int existencia;
+
+    @Schema(description = "Precio del medicamento", example = "125.50")
     private float precio;
+
+    @Schema(description = "Instrucciones de uso del medicamento", example = "Por lo general, se administra de 2 a 5 mg por kg de peso corporal cada 12 o 24 horas.")
     private String instruccionesUso;
-
-    public MedicamentoDTO(long id, String nombre, String clasificacion, String descripcion, Date fechaCaducidad, int existencia, float precio, String instruccionesUso) {
-        this.id = id;
-        this.nombre = nombre;
-        this.clasificacion = clasificacion;
-        this.descripcion = descripcion;
-        this.fechaCaducidad = fechaCaducidad;
-        this.existencia = existencia;
-        this.precio = precio;
-        this.instruccionesUso = instruccionesUso;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getClasificacion() {
-        return clasificacion;
-    }
-
-    public void setClasificacion(String clasificacion) {
-        this.clasificacion = clasificacion;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public Date getFechaCaducidad() {
-        return fechaCaducidad;
-    }
-
-    public void setFechaCaducidad(Date fechaCaducidad) {
-        this.fechaCaducidad = fechaCaducidad;
-    }
-
-    public int getExistencia() {
-        return existencia;
-    }
-
-    public void setExistencia(int existencia) {
-        this.existencia = existencia;
-    }
-
-    public float getPrecio() {
-        return precio;
-    }
-
-    public void setPrecio(float precio) {
-        this.precio = precio;
-    }
-
-    public String getInstruccionesUso() {
-        return instruccionesUso;
-    }
-
-    public void setInstruccionesUso(String instruccionesUso) {
-        this.instruccionesUso = instruccionesUso;
-    }
+    // private Factura factura;
 }

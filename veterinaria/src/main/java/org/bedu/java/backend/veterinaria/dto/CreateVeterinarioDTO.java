@@ -1,4 +1,4 @@
-package main.java.org.bedu.java.backend.veterinaria.dto;
+package org.bedu.java.backend.veterinaria.dto;
 
 import java.time.LocalTime;
 import java.util.Date;
@@ -7,6 +7,9 @@ import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+
+import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data

@@ -1,12 +1,11 @@
-package main.java.org.bedu.java.backend.veterinaria.controller;
+package org.bedu.java.backend.veterinaria.controller;
 
 import java.util.List;
 
-import org.bedu.java.backend.veterinaria.dto.CreateMascotaDTO;
-import org.bedu.java.backend.veterinaria.dto.MascotaDTO;
-import org.bedu.java.backend.veterinaria.dto.UpdateMascotaDTO;
-import org.bedu.java.backend.veterinaria.exception.MascotaNotFoundException;
-import org.bedu.java.backend.veterinaria.service.MascotaService;
+import org.bedu.java.backend.veterinaria.dto.CreateVeterinarioDTO;
+import org.bedu.java.backend.veterinaria.dto.UpdateVeterinarioDTO;
+import org.bedu.java.backend.veterinaria.dto.VeterinarioDTO;
+import org.bedu.java.backend.veterinaria.exception.VeterinarioNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,9 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import main.java.org.bedu.java.backend.veterinaria.dto.CreateVeterinarioDTO;
-import main.java.org.bedu.java.backend.veterinaria.dto.VeterinarioDTO;
-import main.java.org.bedu.java.backend.veterinaria.service.VeterinarioService;
+import org.bedu.java.backend.veterinaria.service.VeterinarioService;
 
 @Tag(name = "Endpoints de veterinario", description = "CRUD de veterinario")
 @RestController

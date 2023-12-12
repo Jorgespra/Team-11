@@ -1,15 +1,18 @@
 package org.bedu.java.backend.veterinaria.mapper;
 
-import org.bedu.java.backend.veterinaria.dto.CreateMascotaDTO;
-import org.bedu.java.backend.veterinaria.dto.MascotaDTO;
-import org.bedu.java.backend.veterinaria.dto.UpdateMascotaDTO;
-import org.bedu.java.backend.veterinaria.model.Mascota;
+import java.util.List;
+
+import org.bedu.java.backend.veterinaria.dto.CreateVeterinarioDTO;
+import org.bedu.java.backend.veterinaria.dto.UpdateVeterinarioDTO;
+import org.bedu.java.backend.veterinaria.model.Veterinario;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 
-@Mapper(componentModel = "spring", injectionStrategy = injectionStrategy.CONSTRUCTOR)
+import org.bedu.java.backend.veterinaria.dto.VeterinarioDTO;
+
+@Mapper(componentModel = "spring", injectionStrategy = InjectionStrategy.CONSTRUCTOR)
 public interface VeterinarioMapper {
 
     VeterinarioDTO toDTO(Veterinario model);
@@ -20,7 +23,4 @@ public interface VeterinarioMapper {
 
     @Mapping(target = "id", ignore = true)
     void update(@MappingTarget Veterinario veterinario, UpdateVeterinarioDTO data);
-
-
-
 }

@@ -1,66 +1,25 @@
 package org.bedu.java.backend.veterinaria.dto;
 
-import java.sql.Time;
-import java.util.Date;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Data;
+import org.bedu.java.backend.veterinaria.model.Mascota;
+import org.bedu.java.backend.veterinaria.model.Veterinario;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
+
+@Data
 public class CitaDTO {
 
-
+    @Schema (description = "Identificador de la cita", example = "30")
     private long id;
-    private String vetName;
-    private String petName;
-    private String dueAppointment;
-    private Date dayAppointment;
-    private Time hourAppointmet;
-
-    public CitaDTO(long id, String vetName, String petName, String dueAppointment, Date dayAppointment,
-            Time hourAppointmet) {
-        this.id = id;
-        this.vetName = vetName;
-        this.petName = petName;
-        this.dueAppointment = dueAppointment;
-        this.dayAppointment = dayAppointment;
-        this.hourAppointmet = hourAppointmet;
-    }
-    
-    public long getId() {
-        return id;
-    }
-    public void setId(long id) {
-        this.id = id;
-    }
-    public String getVetName() {
-        return vetName;
-    }
-    public void setVetName(String vetName) {
-        this.vetName = vetName;
-    }
-    public String getPetName() {
-        return petName;
-    }
-    public void setPetName(String petName) {
-        this.petName = petName;
-    }
-    public String getDueAppointment() {
-        return dueAppointment;
-    }
-    public void setDueAppointment(String dueAppointment) {
-        this.dueAppointment = dueAppointment;
-    }
-    public Date getDayAppointment() {
-        return dayAppointment;
-    }
-    public void setDayAppointment(Date dayAppointment) {
-        this.dayAppointment = dayAppointment;
-    }
-    public Time getHourAppointmet() {
-        return hourAppointmet;
-    }
-    public void setHourAppointmet(Time hourAppointmet) {
-        this.hourAppointmet = hourAppointmet;
-    }
-
-    
+    @Schema (description = "Motivo de la consulta", example = "Estetica, Urgencia, Vacunacion")
+    private String motivoDelaConsulta;
+    @Schema(description = "Fecha en la que se agenda la cita", example = "dd/mm/aaaa")
+    private LocalDate fechaConsulta;
+    @Schema(description = "Hora agendada", example = "hh:mm")
+    private LocalTime hora;
 
 }
 

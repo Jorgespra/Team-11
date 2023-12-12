@@ -1,73 +1,99 @@
 package org.bedu.java.backend.veterinaria.controller;
 
-import org.bedu.java.backend.veterinaria.model.HistorialMedico;
+import org.bedu.java.backend.veterinaria.dto.HistorialMedicoDto;
 import org.bedu.java.backend.veterinaria.service.HistorialMedicoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
 
 import java.util.List;
-
+@Tag(name = "Historiales Médicos", description = "Operaciones relacionadas con historiales médicos CRUD")
 @RestController
-@RequestMapping("/historiales")
+@AllArgsConstructor
+@RequestMapping("veterinaria/historiales")
 public class HistorialMedicoController {
 
-    private final HistorialMedicoService historialMedicoService;
+    private HistorialMedicoService historialMedicoService;
 
-    /*
-     * El constructor está destinado a asegurar que un objeto HistorialMedicoController siempre tenga acceso 
-     * a un objeto HistorialMedicoService válido cuando se crea, utilizando el principio de inyección de dependencias 
-     * para proporcionar esa dependencia.
-     */
-    public HistorialMedicoController(HistorialMedicoService historialMedicoService) {
-        this.historialMedicoService = historialMedicoService;
+
+    @PostMapping
+    @Operation(summary = "Crear un nuevo historial médico")
+    public ResponseEntity<HistorialMedicoDto> createHistorialMedico(@Valid @RequestBody HistorialMedicoDto historialMedico){
+        HistorialMedicoDto savedHistorialMedico = historialMedicoService.createHistorialMedico(historialMedico);
+        return new ResponseEntity<>(savedHistorialMedico, HttpStatus.CREATED);
     }
 
-    // Endpoint para obtener todos los historiales médicos
-    @GetMapping 
-    public ResponseEntity<List<HistorialMedico>> obtenerTodosHistoriales() {
-        List<HistorialMedico> historiales = historialMedicoService.obtenerTodosHistoriales();
+    @GetMapping("{id}")
+    @Operation(summary = "Obtener un historial médico por ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Historial médico encontrado"),
+            @ApiResponse(responseCode = "404", description = "Historial médico no encontrado")
+    })
+    public ResponseEntity<HistorialMedicoDto> getHistorialMedicoById(
+        @Parameter(description = "ID del historial médico", required = true)
+        @PathVariable("id") Long historialMedicoId){
+        HistorialMedicoDto historial = historialMedicoService.getHistorialMedicoById(historialMedicoId);
+        return new ResponseEntity<>(historial, HttpStatus.OK);
+    }
+
+    @GetMapping
+    @Operation(summary = "Obtener todos los historiales médicos")
+    public ResponseEntity<List<HistorialMedicoDto>> getAllHistorialMedico(){
+        List<HistorialMedicoDto> historiales = historialMedicoService.getAllHistorialMedico();
         return new ResponseEntity<>(historiales, HttpStatus.OK);
     }
 
-    // Endpoint para obtener un historial médico por ID
-    @GetMapping("/{id}")
-    public ResponseEntity<HistorialMedico> obtenerHistorialPorId(@PathVariable long id) {
-        HistorialMedico historial = historialMedicoService.obtenerHistorialPorId(id);
-        if (historial != null) {
-            return new ResponseEntity<>(historial, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+    @GetMapping("/mascota/{mascotaId}")
+    @Operation(summary = "Obtener historiales médicos por relacion con mascota")
+    public ResponseEntity<List<HistorialMedicoDto>> getHistorialesByMascotaId(
+        @Parameter(description = "ID de la mascota", required = true)
+        @PathVariable("mascotaId") Long mascotaId) {
+        List<HistorialMedicoDto> historiales = historialMedicoService.getHistorialesByMascotaId(mascotaId);
+        return new ResponseEntity<>(historiales, HttpStatus.OK);
     }
 
-    // Endpoint para crear un nuevo historial médico
-    @PostMapping 
-    public ResponseEntity<HistorialMedico> crearHistorial(@Valid @RequestBody HistorialMedico historial) {
-        HistorialMedico nuevoHistorial = historialMedicoService.crearHistorial(historial);
-        return new ResponseEntity<>(nuevoHistorial, HttpStatus.CREATED);
+    @GetMapping("/veterinario/{veterinarioId}")
+    @Operation(summary = "Obtener historiales médicos por busqueda de veterinario")
+    public ResponseEntity<List<HistorialMedicoDto>> getHistorialesByVeterinarioId(
+        @Parameter(description = "ID del veterinario", required = true)
+        @PathVariable("veterinarioId") Long veterinarioId) {
+        List<HistorialMedicoDto> historiales = historialMedicoService.getHistorialesByVeterinarioId(veterinarioId);
+        return new ResponseEntity<>(historiales, HttpStatus.OK);
     }
 
-    // Endpoint para actualizar un historial médico existente
-    @PutMapping("/{id}") 
-    public ResponseEntity<HistorialMedico> actualizarHistorial(@PathVariable long id, @Valid @RequestBody HistorialMedico historial) {
-        HistorialMedico historialActualizado = historialMedicoService.actualizarHistorial(id, historial);
-        if (historialActualizado != null) {
-            return new ResponseEntity<>(historialActualizado, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+
+    @PutMapping("{id}")
+    @Operation(summary = "Actualizar un historial médico")
+    public ResponseEntity<HistorialMedicoDto> updateHistorialMedico(
+        @Parameter(description = "ID del historial médico", required = true)
+        @PathVariable("id") Long historialMedicoId, @RequestBody @Valid HistorialMedicoDto historialMedico){
+        historialMedico.setId(historialMedicoId);
+        HistorialMedicoDto updateHistorialMedico = historialMedicoService.updateHistorialMedico(historialMedico);
+        return new ResponseEntity<>(updateHistorialMedico, HttpStatus.OK);
     }
 
-    // Endpoint para eliminar un historial médico por ID
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminarHistorial(@PathVariable long id) {
-        if (historialMedicoService.eliminarHistorial(id)) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+    @DeleteMapping("{id}")
+    @Operation(summary = "Eliminar un historial médico, buscandolo por su ID")
+    public ResponseEntity<String> deleteHistorialMedico(
+        @Parameter(description = "ID del historial médico", required = true)
+        @PathVariable("id") Long historialMedicoId){
+        historialMedicoService.deleteHistorialMedico(historialMedicoId);
+        return new ResponseEntity<>("Historial borrado exitosamente", HttpStatus.OK);
     }
+
 }

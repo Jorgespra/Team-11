@@ -1,4 +1,4 @@
-package main.java.org.bedu.java.backend.veterinaria.exception;
+package org.bedu.java.backend.veterinaria.exception;
 
 public class VeterinarioNotFoundException extends RuntimeException{
 

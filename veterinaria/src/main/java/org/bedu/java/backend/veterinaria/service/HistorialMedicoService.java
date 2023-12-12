@@ -1,55 +1,22 @@
 package org.bedu.java.backend.veterinaria.service;
 
-import org.bedu.java.backend.veterinaria.model.HistorialMedico;
-import org.springframework.stereotype.Service;
+import org.bedu.java.backend.veterinaria.dto.HistorialMedicoDto;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-@Service
-public class HistorialMedicoService {
+public interface HistorialMedicoService {
+    HistorialMedicoDto createHistorialMedico(HistorialMedicoDto historialMedico);
 
-    private List<HistorialMedico> historiales = new ArrayList<>();
+    HistorialMedicoDto updateHistorialMedico(HistorialMedicoDto historialMedico);
 
-    // Obtener todos los historiales médicos
-    public List<HistorialMedico> obtenerTodosHistoriales() {
-        return historiales;
-    }
+    void deleteHistorialMedico(Long historialMedicoId);
 
-    // Obtener un historial médico por ID
-    public HistorialMedico obtenerHistorialPorId(long id) {
-        Optional<HistorialMedico> historialEncontrado = historiales.stream()
-                .filter(h -> h.getId() == id)
-                .findFirst();
-        return historialEncontrado.orElse(null);
-    }
+    List<HistorialMedicoDto> getAllHistorialMedico();
+    
+    HistorialMedicoDto getHistorialMedicoById(Long historialMedicoId);
 
-    // Crear un nuevo historial médico
-    public HistorialMedico crearHistorial(HistorialMedico historial) {
-        historial.setId(generarNuevoId());
-        historiales.add(historial);
-        return historial;
-    }
+    List<HistorialMedicoDto> getHistorialesByMascotaId(Long mascotaId);
 
-    // Actualizar un historial médico existente
-    public HistorialMedico actualizarHistorial(long id, HistorialMedico historialActualizado) {
-        for (int i = 0; i < historiales.size(); i++) {
-            if (historiales.get(i).getId() == id) {
-                historiales.set(i, historialActualizado);
-                return historialActualizado;
-            }
-        }
-        return null;
-    }
+    List<HistorialMedicoDto> getHistorialesByVeterinarioId(Long veterinarioId);
 
-    // Eliminar un historial médico por ID
-    public boolean eliminarHistorial(long id) {
-        return historiales.removeIf(h -> h.getId() == id);
-    }
-
-    // Método auxiliar para generar un nuevo ID (puedes ajustarlo según tus necesidades)
-    private long generarNuevoId() {
-        return System.currentTimeMillis(); // En este ejemplo, usamos la marca de tiempo actual como ID
-    }
 }

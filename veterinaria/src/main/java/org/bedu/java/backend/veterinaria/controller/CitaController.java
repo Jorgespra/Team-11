@@ -1,34 +1,35 @@
 package org.bedu.java.backend.veterinaria.controller;
 
-
-
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.bedu.java.backend.veterinaria.dto.CitaDTO;
 import org.bedu.java.backend.veterinaria.dto.CreateCitaDTO;
 import org.bedu.java.backend.veterinaria.service.CitaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Tag(name = "Endpoints de Citas", description = "CRUD de Citas")
 @RestController
+@RequestMapping("citas")
 public class CitaController {
 
     @Autowired
-    private CitaService citaService;
+    private CitaService service;
 
-    @RequestMapping("/obtenerCitas")
-    public List<CitaDTO> getAll(){
-        return citaService.getAll();
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public List<CitaDTO> findAll(){
+        return service.findAll();
     }
 
-    @RequestMapping ("/crearCita")
-    public CitaDTO save (@RequestBody CreateCitaDTO data) {
-        return citaService.save(data);
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public CitaDTO save (@Valid @RequestBody CreateCitaDTO data) {
+        return service.save(data);
 
     }
-
 
 }

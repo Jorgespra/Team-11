@@ -1,6 +1,17 @@
-package main.java.org.bedu.java.backend.veterinaria.service;
+package org.bedu.java.backend.veterinaria.service;
 
-import main.java.org.bedu.java.backend.veterinaria.repository.VeterinarioRepository;
+import java.util.List;
+import java.util.Optional;
+
+import org.bedu.java.backend.veterinaria.dto.CreateVeterinarioDTO;
+import org.bedu.java.backend.veterinaria.dto.UpdateVeterinarioDTO;
+import org.bedu.java.backend.veterinaria.dto.VeterinarioDTO;
+import org.bedu.java.backend.veterinaria.exception.VeterinarioNotFoundException;
+import org.bedu.java.backend.veterinaria.mapper.VeterinarioMapper;
+import org.bedu.java.backend.veterinaria.model.Veterinario;
+import org.bedu.java.backend.veterinaria.repository.VeterinarioRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 public class VeterinarioService {
@@ -16,7 +27,8 @@ public class VeterinarioService {
     }
 
     public VeterinarioDTO save(CreateVeterinarioDTO data){
-        Veterianrio entity = veterinarioRepository.save(mapper.toModel(data));
+        Veterinario entity = veterinarioRepository.save(mapper.toModel(data));
+        return mapper.toDTO(entity);
     }
 
     public void update(long veterinarioId, UpdateVeterinarioDTO data) throws VeterinarioNotFoundException {

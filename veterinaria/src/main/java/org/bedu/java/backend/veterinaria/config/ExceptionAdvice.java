@@ -1,4 +1,5 @@
 package org.bedu.java.backend.veterinaria.config;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -16,7 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 @RestControllerAdvice
 @Slf4j
 public class ExceptionAdvice {
-
+    
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorDTO validationErrors(MethodArgumentNotValidException ex) {
@@ -41,6 +42,4 @@ public class ExceptionAdvice {
         log.error(ex.getMessage());
         return new ErrorDTO("ERR_UNKNOWN", "Hubo un error desconocido", null);
     }
-   
-
 }

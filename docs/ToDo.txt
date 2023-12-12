@@ -1,0 +1,15 @@
+Reformular las clases usando loombok
+
+En el paquete 'dto', fíjense que tienen clases que se repiten en el paquete 'model'. Recuerden que el modelo son los datos que se van a guardar en la app y como se relacionan entre si, mientras que los DTO se utilizan para transferir datos entre diferentes capas de su aplicación.
+
+Fijarse que los modelos tienen que estar relacionados entre si, según su proyecto lo requiera. Ej, dentro del paquete 'model' tienen una clase 'Factura' y otra 'Medicamento'. Sin embargo, en la Clase Factura, hay un atributo 'medicamento' que es de tipo String, y no está utilizando a la Clase del modelo Medicamento para cargar u obtener los datos de medicamento.
+
+En los controladores recuerden usar los verbos (GET,POST,PUT,DELETE), cuando usen @RequestMapping en el método, su verbo por defecto es el 'GET', para poder usar otro verbo, por ej para crear un cliente sería @RequestMapping(value = "/crearCita", method = RequestMethod.POST)
+
+Crear tipos para:
+	las especies PERRO, GATO, HAMSTER, AVES, REPTILES, ARACNIDOS, PECES
+	los servicios que ofrece la veterinaria CONSULTA, VACUNA, CIRUGIA, HOSPEDAJE
+
+Diagramas de clases, de uso, UML, segun se requiera
+
+Readme.md

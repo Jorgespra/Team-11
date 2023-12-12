@@ -1,58 +1,62 @@
 package org.bedu.java.backend.veterinaria.model;
 
+
+// import lombok.AllArgsConstructor;
+// import lombok.Data;
+
+// @Data
+// @AllArgsConstructor
+
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+// import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+// import jakarta.persistence.JoinColumn;
+// import jakarta.persistence.JoinColumns;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.DecimalMax;
+import jakarta.validation.constraints.DecimalMin;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@ToString
+@Entity
+@Table(name = "facturas")
 public class Factura {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String detalles;
-    private String servicios;
-    private String medicamentos;
-    private double costo;
 
-    public Factura(long id, String detalles, String servicios, String medicamentos, double costo) {
-        this.id = id;
-        this.detalles = detalles;
-        this.servicios = servicios;
-        this.medicamentos = medicamentos;
-        this.costo = costo;
-    }
+    @DecimalMin("0.01")
+    private double sub_total;
 
-    public String getDetalles() {
-        return detalles;
-    }
+    @DecimalMin("0.01")
+    @DecimalMax("100.00") // TODO: ¿Por qué un limite para el IVA?
+    private double iva;
 
-    public void setDetalles(String detalles) {
-        this.detalles = detalles;
-    }
+    @DecimalMin("0.01")
+    private double total;
+    // @JoinColumns({
+    // @JoinColumn(name="MEDICAMENTO_ID",referencedColumnName="id")
+    // })
+    // @JoinColumn(name = Medicamento.id)
+    /*
+     * public Factura(){
+     * this.medicamentos = new LinkedList<Medicamento>();
+     * }
+     */
 
-    public String getServicios() {
-        return servicios;
-    }
+    @Column(nullable = false, length = 100)
+    private String rfc_cliente;
 
-    public void setServicios(String servicios) {
-        this.servicios = servicios;
-    }
-
-    public String getMedicamentos() {
-        return medicamentos;
-    }
-
-    public void setMedicamentos(String medicamentos) {
-        this.medicamentos = medicamentos;
-    }
-
-    public double getCosto() {
-        return costo;
-    }
-
-    public void setCosto(double costo) {
-        this.costo = costo;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
+    @Column(nullable = false, length = 100)
+    private String razon_social;
 
 }

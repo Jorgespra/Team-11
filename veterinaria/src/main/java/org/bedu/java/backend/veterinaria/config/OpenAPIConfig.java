@@ -1,12 +1,15 @@
-package main.java.org.bedu.java.backend.veterinaria.config;
+package org.bedu.java.backend.veterinaria.config;
+
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.info.Info;
 
 @OpenAPIDefinition(
-    info= @Info(
-        title = "API de veterinaria",
-        description = "API para administración de una veterinaria",
-        version = "v0.1.0"
-    )
+        info = @Info(
+                title = "API de Veterinaria",
+                description = "API para la admninistración de una veterinaria",
+                version = "v0.5.0"
+        )
 )
 public class OpenAPIConfig {
-    
+
 }
