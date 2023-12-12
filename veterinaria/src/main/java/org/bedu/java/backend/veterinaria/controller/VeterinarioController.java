@@ -58,7 +58,4 @@ public class VeterinarioController {
         service.deleteById(id);
     }
 
-
-
-
 }

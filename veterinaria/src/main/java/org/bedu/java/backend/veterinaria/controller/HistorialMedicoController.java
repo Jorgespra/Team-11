@@ -1,6 +1,7 @@
 package org.bedu.java.backend.veterinaria.controller;
 
 import org.bedu.java.backend.veterinaria.dto.HistorialMedicoDto;
+import org.bedu.java.backend.veterinaria.exception.HistorialMedicoNotFoundException;
 import org.bedu.java.backend.veterinaria.service.HistorialMedicoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -27,15 +29,13 @@ import java.util.List;
 @AllArgsConstructor
 @RequestMapping("veterinaria/historiales")
 public class HistorialMedicoController {
-
-    private HistorialMedicoService historialMedicoService;
-
+    private final HistorialMedicoService historialMedicoService;
 
     @PostMapping
     @Operation(summary = "Crear un nuevo historial médico")
-    public ResponseEntity<HistorialMedicoDto> createHistorialMedico(@Valid @RequestBody HistorialMedicoDto historialMedico){
-        HistorialMedicoDto savedHistorialMedico = historialMedicoService.createHistorialMedico(historialMedico);
-        return new ResponseEntity<>(savedHistorialMedico, HttpStatus.CREATED);
+    @ResponseStatus(HttpStatus.CREATED)
+    public HistorialMedicoDto createHistorialMedico(@Valid @RequestBody HistorialMedicoDto historialMedico) throws HistorialMedicoNotFoundException {
+        return historialMedicoService.createHistorialMedico(historialMedico);
     }
 
     @GetMapping("{id}")
@@ -46,54 +46,53 @@ public class HistorialMedicoController {
     })
     public ResponseEntity<HistorialMedicoDto> getHistorialMedicoById(
         @Parameter(description = "ID del historial médico", required = true)
-        @PathVariable("id") Long historialMedicoId){
+        @PathVariable("id") Long historialMedicoId) throws HistorialMedicoNotFoundException {
         HistorialMedicoDto historial = historialMedicoService.getHistorialMedicoById(historialMedicoId);
         return new ResponseEntity<>(historial, HttpStatus.OK);
     }
 
     @GetMapping
     @Operation(summary = "Obtener todos los historiales médicos")
-    public ResponseEntity<List<HistorialMedicoDto>> getAllHistorialMedico(){
-        List<HistorialMedicoDto> historiales = historialMedicoService.getAllHistorialMedico();
-        return new ResponseEntity<>(historiales, HttpStatus.OK);
+    @ResponseStatus(HttpStatus.OK)
+    public List<HistorialMedicoDto> getAllHistorialMedico() {
+        return historialMedicoService.getAllHistorialMedico();
     }
 
     @GetMapping("/mascota/{mascotaId}")
-    @Operation(summary = "Obtener historiales médicos por relacion con mascota")
-    public ResponseEntity<List<HistorialMedicoDto>> getHistorialesByMascotaId(
+    @Operation(summary = "Obtener historiales médicos por relación con mascota")
+    @ResponseStatus(HttpStatus.OK)
+    public List<HistorialMedicoDto> getHistorialesByMascotaId(
         @Parameter(description = "ID de la mascota", required = true)
         @PathVariable("mascotaId") Long mascotaId) {
-        List<HistorialMedicoDto> historiales = historialMedicoService.getHistorialesByMascotaId(mascotaId);
-        return new ResponseEntity<>(historiales, HttpStatus.OK);
+        return historialMedicoService.getHistorialesByMascotaId(mascotaId);
     }
 
     @GetMapping("/veterinario/{veterinarioId}")
-    @Operation(summary = "Obtener historiales médicos por busqueda de veterinario")
-    public ResponseEntity<List<HistorialMedicoDto>> getHistorialesByVeterinarioId(
+    @Operation(summary = "Obtener historiales médicos por búsqueda de veterinario")
+    @ResponseStatus(HttpStatus.OK)
+    public List<HistorialMedicoDto> getHistorialesByVeterinarioId(
         @Parameter(description = "ID del veterinario", required = true)
         @PathVariable("veterinarioId") Long veterinarioId) {
-        List<HistorialMedicoDto> historiales = historialMedicoService.getHistorialesByVeterinarioId(veterinarioId);
-        return new ResponseEntity<>(historiales, HttpStatus.OK);
+        return historialMedicoService.getHistorialesByVeterinarioId(veterinarioId);
     }
-
 
     @PutMapping("{id}")
     @Operation(summary = "Actualizar un historial médico")
-    public ResponseEntity<HistorialMedicoDto> updateHistorialMedico(
+    @ResponseStatus(HttpStatus.OK)
+    public HistorialMedicoDto updateHistorialMedico(
         @Parameter(description = "ID del historial médico", required = true)
-        @PathVariable("id") Long historialMedicoId, @RequestBody @Valid HistorialMedicoDto historialMedico){
+        @PathVariable("id") Long historialMedicoId, @RequestBody @Valid HistorialMedicoDto historialMedico) throws HistorialMedicoNotFoundException {
         historialMedico.setId(historialMedicoId);
-        HistorialMedicoDto updateHistorialMedico = historialMedicoService.updateHistorialMedico(historialMedico);
-        return new ResponseEntity<>(updateHistorialMedico, HttpStatus.OK);
+        return historialMedicoService.updateHistorialMedico(historialMedico);
     }
 
     @DeleteMapping("{id}")
-    @Operation(summary = "Eliminar un historial médico, buscandolo por su ID")
+    @Operation(summary = "Eliminar un historial médico, buscándolo por su ID")
+    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<String> deleteHistorialMedico(
         @Parameter(description = "ID del historial médico", required = true)
-        @PathVariable("id") Long historialMedicoId){
+        @PathVariable("id") Long historialMedicoId) {
         historialMedicoService.deleteHistorialMedico(historialMedicoId);
         return new ResponseEntity<>("Historial borrado exitosamente", HttpStatus.OK);
     }
-
 }

@@ -51,5 +51,9 @@ public class Veterinario {
     private LocalTime horaSalida;
 
 
+    @OneToOne
+    @JoinColumn(name = "historial_medico_id", referencedColumnName = "id")
+    private HistorialMedico historialMedico;
+
 }
 

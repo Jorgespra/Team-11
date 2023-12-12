@@ -27,11 +27,11 @@ public class HistorialMedico {
     private long id;
 
     @ManyToOne
-    @JoinColumn(name = "veterinario_id")
+    @JoinColumn(name = "veterinario_id", referencedColumnName = "id")
     private Veterinario doctor;
 
     @ManyToOne
-    @JoinColumn(name = "mascota_id")
+    @JoinColumn(name = "mascota_id", referencedColumnName = "id")
     private Mascota mascota;
 
     @Column(nullable = false)
