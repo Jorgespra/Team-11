@@ -20,20 +20,11 @@ public class Cita {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @ManyToOne
-    @JoinColumn(name = "veterinario_id", nullable = false)
-    private Veterinario veterinario;
-
-    @ManyToOne
-    @JoinColumn (name = "mascota_id", nullable = false)
-   private Mascota mascota;
-
     @Column(nullable = false, length = 200)
-    private String motivoDelaConsulta;
+    private MotivoCita motivoDelaConsulta;
     @Column (nullable = false)
     private LocalDate fechaConsulta;
     @Column (nullable = false)
     private LocalTime hora;
-
 
 }
