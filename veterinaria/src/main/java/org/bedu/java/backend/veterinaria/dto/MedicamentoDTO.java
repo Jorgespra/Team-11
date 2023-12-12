@@ -6,8 +6,6 @@ import lombok.Data;
 
 import java.time.LocalDate;
 
-import org.bedu.java.backend.veterinaria.model.Factura;
-
 @Data
 @AllArgsConstructor
 public class MedicamentoDTO {

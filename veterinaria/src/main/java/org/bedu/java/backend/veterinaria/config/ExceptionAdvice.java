@@ -3,9 +3,6 @@ package org.bedu.java.backend.veterinaria.config;
 import java.util.LinkedList;
 import java.util.List;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import org.bedu.java.backend.veterinaria.dto.ErrorDTO;
 import org.bedu.java.backend.veterinaria.exception.RuntimeException;
 import org.springframework.validation.FieldError;

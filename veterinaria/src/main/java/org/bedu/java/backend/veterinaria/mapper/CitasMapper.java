@@ -1,6 +1,5 @@
 package org.bedu.java.backend.veterinaria.mapper;
 
-import ch.qos.logback.core.model.ComponentModel;
 import org.bedu.java.backend.veterinaria.dto.CitaDTO;
 import org.bedu.java.backend.veterinaria.dto.CreateCitaDTO;
 import org.bedu.java.backend.veterinaria.model.Cita;

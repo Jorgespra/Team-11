@@ -9,9 +9,6 @@ import org.bedu.java.backend.veterinaria.repository.CitaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.LinkedList;
-
-
 @Service
 public class CitaService {
 
@@ -36,7 +33,3 @@ public class CitaService {
         return mapper.toDTO(entity);
     }
 }
-
-
-
-

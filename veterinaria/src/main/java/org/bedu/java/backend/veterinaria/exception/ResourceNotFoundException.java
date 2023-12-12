@@ -2,7 +2,6 @@ package org.bedu.java.backend.veterinaria.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.bedu.java.backend.veterinaria.exception.RuntimeException;
 
 @ResponseStatus(value = HttpStatus.NOT_FOUND)
 public class ResourceNotFoundException extends RuntimeException{
