@@ -31,7 +31,6 @@ public class Veterinario {
     private String apellidoMaterno;
 
     @Column(name = "fecha_nacimiento", nullable = false)
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date fechaNacimiento;
 
     @Column(nullable = false, length = 13)
