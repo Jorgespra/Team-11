@@ -5,7 +5,6 @@ import org.bedu.java.backend.veterinaria.dto.MascotaDTO;
 import org.bedu.java.backend.veterinaria.dto.UpdateMascotaDTO;
 import org.bedu.java.backend.veterinaria.mapper.MascotaMapper;
 import org.bedu.java.backend.veterinaria.service.MascotaService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +15,7 @@ public class DatabaseInitializer implements CommandLineRunner {
 
     private final MascotaService mascotaService;
 
-    @Autowired
+    //@Autowired
     public DatabaseInitializer(MascotaService mascotaService) {
         this.mascotaService = mascotaService;
     }

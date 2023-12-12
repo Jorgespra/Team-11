@@ -23,7 +23,7 @@ import lombok.Setter;
 public class HistorialMedicoDto {
 
     @Schema(description = "ID del historial médico", example = "1")
-    private long id;
+    private Long id;
 
     @Schema(description = "Veterinario asociado al historial médico", required = true)
     @NotNull(message = "El campo 'doctor' no puede ser nulo")

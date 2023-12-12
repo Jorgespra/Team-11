@@ -24,6 +24,7 @@ public class HistorialMedicoImpl implements HistorialMedicoService {
     private VeterinarioRepository veterinarioRepository;
     private MascotaRepository mascotaRepository;
 
+    /* 
     @Override
     public HistorialMedicoDto createHistorialMedico(HistorialMedicoDto historialMedicoDto) {
         HistorialMedico historialMedico = AutoHistorialMedicoMapper.MAPPER.mapToHistorialMedico(historialMedicoDto);
@@ -54,7 +55,30 @@ public class HistorialMedicoImpl implements HistorialMedicoService {
 
         return AutoHistorialMedicoMapper.MAPPER.mapToHistorialMedicoDto(savedHistorialMedico);
     }
+    */
 
+    @Override
+    public HistorialMedicoDto createHistorialMedico(HistorialMedicoDto historialMedicoDto) {
+    HistorialMedico historialMedico = AutoHistorialMedicoMapper.MAPPER.mapToHistorialMedico(historialMedicoDto);
+
+    // Guardar el Veterinario
+    Veterinario doctor = historialMedico.getDoctor();
+    doctor = veterinarioRepository.save(doctor);
+
+    // Guardar la Mascota
+    Mascota mascota = historialMedico.getMascota();
+    mascota = mascotaRepository.save(mascota);
+
+    // Asignar el Veterinario y la Mascota al HistorialMedico
+    historialMedico.setDoctor(doctor);
+    historialMedico.setMascota(mascota);
+
+    HistorialMedico savedHistorialMedico = historialMedicoRepository.save(historialMedico);
+
+    return AutoHistorialMedicoMapper.MAPPER.mapToHistorialMedicoDto(savedHistorialMedico);
+    }
+    
+    
     @Override
     public List<HistorialMedicoDto> getAllHistorialMedico() {
         List<HistorialMedico> historialesMedico = historialMedicoRepository.findAll();
@@ -62,7 +86,7 @@ public class HistorialMedicoImpl implements HistorialMedicoService {
         return historialesMedico.stream().map((historialMedico) -> AutoHistorialMedicoMapper.MAPPER.mapToHistorialMedicoDto(historialMedico))
         .collect(Collectors.toList());
     }
-
+    /* 
     @Override
     public HistorialMedicoDto updateHistorialMedico(HistorialMedicoDto historialMedico) {
 
@@ -83,13 +107,49 @@ public class HistorialMedicoImpl implements HistorialMedicoService {
 
         return AutoHistorialMedicoMapper.MAPPER.mapToHistorialMedicoDto(updateHistorialMedico);
 
+    }*/
+    @Override
+    public HistorialMedicoDto updateHistorialMedico(HistorialMedicoDto historialMedico) {
+    try {
+        HistorialMedico existingHistorialMedico = historialMedicoRepository.findById(historialMedico.getId())
+                .orElseThrow(() -> new ResourceNotFoundException("HistorialMedico", "id", historialMedico.getId()));
+
+        existingHistorialMedico.setDoctor(historialMedico.getDoctor());
+        existingHistorialMedico.setMascota(historialMedico.getMascota());
+        existingHistorialMedico.setFechaConsulta(historialMedico.getFechaConsulta());
+        existingHistorialMedico.setDiagnostico(historialMedico.getDiagnostico());
+        existingHistorialMedico.setTratamientoActual(historialMedico.getTratamientoActual());
+        existingHistorialMedico.setMedicamentosRecetados(historialMedico.getMedicamentosRecetados());
+        existingHistorialMedico.setResultadoPruebas(historialMedico.getResultadoPruebas());
+        existingHistorialMedico.setObservaciones(historialMedico.getObservaciones());
+
+        HistorialMedico updateHistorialMedico = historialMedicoRepository.save(existingHistorialMedico);
+
+        return AutoHistorialMedicoMapper.MAPPER.mapToHistorialMedicoDto(updateHistorialMedico);
+    } catch (ResourceNotFoundException ex) {
+        // Manejar la excepción aquí
+        ex.printStackTrace(); // Imprime el seguimiento de la pila en la consola
+        // También puedes lanzar otra excepción, si es necesario
+        throw new RuntimeException("Error al actualizar HistorialMedico", ex);
     }
+}
 
     @Override
-    public void deleteHistorialMedico(Long historialMedicoId) {
-        historialMedicoRepository.deleteById(historialMedicoId);
+    public HistorialMedicoDto getHistorialMedicoById(Long historialMedicoId) {
+    try {
+        HistorialMedico historialMedico = historialMedicoRepository.findById(historialMedicoId)
+                .orElseThrow(() -> new ResourceNotFoundException("HistorialMedico", "id", historialMedicoId));
+
+        return AutoHistorialMedicoMapper.MAPPER.mapToHistorialMedicoDto(historialMedico);
+    } catch (ResourceNotFoundException ex) {
+        // Manejar la excepción aquí
+        ex.printStackTrace();
+        // También puedes lanzar otra excepción, si es necesario
+        throw new RuntimeException("HistorialMedico no encontrado", ex);
+        }
     }
 
+    /*
     @Override
     public HistorialMedicoDto getHistorialMedicoById(Long historialMedicoId) {
          HistorialMedico historialMedico = historialMedicoRepository.findById(historialMedicoId).orElseThrow(
@@ -97,7 +157,13 @@ public class HistorialMedicoImpl implements HistorialMedicoService {
         );
         return AutoHistorialMedicoMapper.MAPPER.mapToHistorialMedicoDto(historialMedico);
     }
+    */
 
+    @Override
+    public void deleteHistorialMedico(Long historialMedicoId) {
+        historialMedicoRepository.deleteById(historialMedicoId);
+    }
+    
     @Override
     public List<HistorialMedicoDto> getHistorialesByMascotaId(Long mascotaId) {
         List<HistorialMedico> historiales = historialMedicoRepository.findByMascotaId(mascotaId);
