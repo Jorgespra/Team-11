@@ -5,7 +5,7 @@ import jakarta.validation.constraints.*;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 @Data
 public class CreateMedicamentoDTO {
@@ -25,7 +25,7 @@ public class CreateMedicamentoDTO {
     @Schema(description = "Fecha en la que caduca el medicamento", example = "2025-01-01")
     @NotNull(message = "La fecha de caducidad del medicamento no puede ser nula")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate fechaCaducidad;
+    private Date fechaCaducidad;
 
     @Schema(description = "Cantidad de medicamentos en existencia", example = "100")
     @Min(value = 1, message = "La cantidad o existencia del medicamento debe ser mayor o igual que 1")
@@ -38,5 +38,4 @@ public class CreateMedicamentoDTO {
     @Schema(description = "Instrucciones de uso del medicamento", example = "Por lo general, se administra de 2 a 5 mg por kg de peso corporal cada 12 o 24 horas.")
     @NotBlank(message = "Las instrucciones de uso del medicamento son obligatorias")
     private String instruccionesUso;
-
 }

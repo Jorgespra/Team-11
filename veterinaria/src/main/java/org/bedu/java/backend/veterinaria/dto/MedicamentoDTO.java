@@ -4,7 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 @Data
 @AllArgsConstructor
@@ -23,7 +23,7 @@ public class MedicamentoDTO {
     private String descripcion;
 
     @Schema(description = "Fecha en la que caduca el medicamento", example = "2025-01-01")
-    private LocalDate fechaCaducidad;
+    private Date fechaCaducidad;
 
     @Schema(description = "Cantidad de medicamentos en existencia", example = "100")
     private int existencia;
