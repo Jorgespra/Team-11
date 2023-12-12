@@ -4,14 +4,11 @@ import org.bedu.java.backend.veterinaria.dto.CreateMedicamentoDTO;
 import org.bedu.java.backend.veterinaria.dto.MedicamentoDTO;
 import org.bedu.java.backend.veterinaria.dto.UpdateMedicamentoDTO;
 import org.bedu.java.backend.veterinaria.model.Medicamento;
-import org.mapstruct.InjectionStrategy;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.MappingTarget;
+import org.mapstruct.*;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", injectionStrategy = InjectionStrategy.CONSTRUCTOR)
+@Mapper(componentModel = "spring", injectionStrategy = InjectionStrategy.CONSTRUCTOR, nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface MedicamentoMapper {
 
     MedicamentoDTO toDTO(Medicamento model);

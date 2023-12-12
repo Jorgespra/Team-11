@@ -3,29 +3,22 @@ package org.bedu.java.backend.veterinaria.dto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
-
-import java.sql.Date;
+import java.util.Date;
 
 @Data
 public class UpdateMedicamentoDTO {
     @Schema(description = "Nombre del medicamento", example = "Doxiciclina")
-    @NotBlank(message = "El nombre del medicamento es obligatorio")
     private String nombre;
 
     @Schema(description = "Clasificación o tipo de medicamento", example = "Antibióticos")
-    @NotBlank(message = "La clasificación del medicamento es obligatoria")
     private String clasificacion;
 
     @Schema(description = "Descripción del medicamento", example = "Útil para tratar enfermedades transmitidas por garrapatas y enfermedades respiratorias.")
-    @NotBlank(message ="LA descripción del medicamento es obligatoria")
     private String descripcion;
 
     @Schema(description = "Fecha en la que caduca el medicamento", example = "2025-01-01")
-    @NotNull(message = "La fecha de caducidad del medicamento no puede ser nula")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date fechaCaducidad;
 
@@ -38,6 +31,5 @@ public class UpdateMedicamentoDTO {
     private float precio;
 
     @Schema(description = "Instrucciones de uso del medicamento", example = "Por lo general, se administra de 2 a 5 mg por kg de peso corporal cada 12 o 24 horas.")
-    @NotBlank(message = "Las instrucciones de uso del medicamento son obligatorias")
     private String instruccionesUso;
 }

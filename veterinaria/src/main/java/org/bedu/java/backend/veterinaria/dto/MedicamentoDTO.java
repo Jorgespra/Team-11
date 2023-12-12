@@ -4,7 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import java.sql.Date;
+import java.util.Date;
 
 @Data
 public class MedicamentoDTO {

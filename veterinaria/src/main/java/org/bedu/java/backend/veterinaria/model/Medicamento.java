@@ -3,7 +3,6 @@ package org.bedu.java.backend.veterinaria.model;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.validator.constraints.Range;
-
 import java.util.Date;
 
 @Getter
