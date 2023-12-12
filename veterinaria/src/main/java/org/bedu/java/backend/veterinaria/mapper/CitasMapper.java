@@ -25,5 +25,4 @@ public interface CitasMapper {
     @Mapping(target = "id", ignore = true)
     void update(@MappingTarget Cita cita, UpdateCitaDTO data);
 
-
 }
