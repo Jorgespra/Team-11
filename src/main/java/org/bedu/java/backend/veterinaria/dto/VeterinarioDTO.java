@@ -1,20 +1,17 @@
-package org.bedu.java.backend.veterinaria.model;
-import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+package org.bedu.java.backend.veterinaria.dto;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalTime;
 import java.util.Date;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
-@Getter
-@Setter
-@ToString
-@Entity
-@Table(name = "veterinario")
-public class Veterinario {
+@Data
+public class VeterinarioDTO {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -48,4 +45,5 @@ public class Veterinario {
     @Column(name = "hora_salida", nullable = false)
     @DateTimeFormat(pattern = "HH:mm")
     private LocalTime horaSalida;
+
 }
