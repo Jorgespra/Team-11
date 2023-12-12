@@ -26,8 +26,8 @@ public class HistorialMedicoDto {
     private Long id;
 
     @Schema(description = "Veterinario asociado al historial médico", required = true)
-    @NotNull(message = "El campo 'doctor' no puede ser nulo")
-    private Veterinario doctor;
+    @NotNull(message = "El campo 'veterinario' no puede ser nulo")
+    private Veterinario veterinario;
 
     @Schema(description = "Mascota asociada al historial médico", required = true)
     @NotNull(message = "El campo 'mascota' no puede ser nulo")

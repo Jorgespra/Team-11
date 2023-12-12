@@ -28,7 +28,7 @@ public class HistorialMedico {
 
     @ManyToOne
     @JoinColumn(name = "veterinario_id")
-    private Veterinario doctor;
+    private Veterinario veterinario;
 
     @ManyToOne
     @JoinColumn(name = "mascota_id")

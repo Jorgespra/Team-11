@@ -17,7 +17,7 @@ public class HistorialMedicoMapper {
     public static HistorialMedicoDto mapToHistorialMedicoDto(HistorialMedico historialMedico){
         HistorialMedicoDto historialMedicoDto = new HistorialMedicoDto(
             historialMedico.getId(),
-            historialMedico.getDoctor(),
+            historialMedico.getVeterinario(),
             historialMedico.getMascota(),
             historialMedico.getFechaConsulta(),
             historialMedico.getDiagnostico(),
@@ -38,7 +38,7 @@ public class HistorialMedicoMapper {
     public static HistorialMedico mapToHistorialMedico(HistorialMedicoDto historialMedicoDto){
         HistorialMedico historialMedico = new HistorialMedico(
             historialMedicoDto.getId(),
-            historialMedicoDto.getDoctor(),
+            historialMedicoDto.getVeterinario(),
             historialMedicoDto.getMascota(),
             historialMedicoDto.getFechaConsulta(),
             historialMedicoDto.getDiagnostico(),
