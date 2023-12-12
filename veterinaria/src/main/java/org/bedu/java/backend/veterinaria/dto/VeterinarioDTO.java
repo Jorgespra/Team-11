@@ -10,6 +10,9 @@ import lombok.Data;
 @Data
 public class VeterinarioDTO {
 
+    @Schema(description = "Identificador del veterinario", example = "100")
+    private Long id;
+
     @Schema(description = "Nombre del veterinario", example = "Alberto")
     private String nombre;
 
