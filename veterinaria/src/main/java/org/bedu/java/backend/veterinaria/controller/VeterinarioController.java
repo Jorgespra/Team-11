@@ -24,7 +24,7 @@ import org.bedu.java.backend.veterinaria.service.VeterinarioService;
 
 @Tag(name = "Endpoints de veterinario", description = "CRUD de veterinario")
 @RestController
-@RequestMapping
+@RequestMapping("/veterinarios")
 public class VeterinarioController {
     
     @Autowired
