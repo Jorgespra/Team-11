@@ -8,8 +8,9 @@ import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
+import org.mapstruct.NullValuePropertyMappingStrategy;
 
-@Mapper(componentModel = "spring", injectionStrategy = InjectionStrategy.CONSTRUCTOR)
+@Mapper(componentModel = "spring", injectionStrategy = InjectionStrategy.CONSTRUCTOR, nullValuePropertyMappingStrategy =  NullValuePropertyMappingStrategy.IGNORE)
 public interface FacturaMapper {
     FacturaDTO toDTO(Factura model);
 
@@ -18,10 +19,13 @@ public interface FacturaMapper {
 
     // En el target se va a ignorar el campo "id"
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "total", ignore = true)
     public Factura toModel(CreateFacturaDTO dto);
 
-
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "total", ignore = true)
     void update(@MappingTarget Factura factura, UpdateFacturaDTO data);
-    
+
+
+
 }
