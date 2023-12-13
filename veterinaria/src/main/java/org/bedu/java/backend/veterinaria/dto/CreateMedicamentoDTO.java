@@ -2,12 +2,14 @@ package org.bedu.java.backend.veterinaria.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
 @Data
+@AllArgsConstructor
 public class CreateMedicamentoDTO {
 
     @Schema(description = "Nombre del medicamento", example = "Doxiciclina")
