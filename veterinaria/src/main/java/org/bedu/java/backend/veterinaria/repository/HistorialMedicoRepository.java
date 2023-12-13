@@ -9,6 +9,6 @@ import java.util.List;
 @Repository
 public interface HistorialMedicoRepository extends JpaRepository<HistorialMedico, Long> {
 
-    List<HistorialMedico> findByDoctorId(Long doctorId);
+    List<HistorialMedico> findByVeterinarioId(Long veterinarioId);
     List<HistorialMedico> findByMascotaId(Long mascotaId);
 }

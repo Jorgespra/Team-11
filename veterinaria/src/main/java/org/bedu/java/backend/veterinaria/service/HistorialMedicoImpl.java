@@ -30,13 +30,13 @@ public class HistorialMedicoImpl implements HistorialMedicoService {
     HistorialMedico historialMedico = HistorialMedicoMapper.MAPPER.mapToHistorialMedico(historialMedicoDto);
 
     // Obtener o guardar el Veterinario
-    Veterinario doctor = saveOrUpdateVeterinario(historialMedico.getDoctor());
+    Veterinario veterinario = saveOrUpdateVeterinario(historialMedico.getVeterinario());
 
     // Obtener o guardar la Mascota
     Mascota mascota = saveOrUpdateMascota(historialMedico.getMascota());
 
     // Asignar el Veterinario y la Mascota al HistorialMedico
-    historialMedico.setDoctor(doctor);
+    historialMedico.setVeterinario(veterinario);
     historialMedico.setMascota(mascota);
 
     HistorialMedico savedHistorialMedico = historialMedicoRepository.save(historialMedico);
@@ -44,12 +44,12 @@ public class HistorialMedicoImpl implements HistorialMedicoService {
     return HistorialMedicoMapper.MAPPER.mapToHistorialMedicoDto(savedHistorialMedico);
 }
 
-    private Veterinario saveOrUpdateVeterinario(Veterinario doctor) throws HistorialMedicoNotFoundException {
-    if (doctor != null && doctor.getId() != 0) {
-        return veterinarioRepository.findById(doctor.getId())
-                .orElseThrow(() -> new HistorialMedicoNotFoundException(doctor.getId()));
+    private Veterinario saveOrUpdateVeterinario(Veterinario veterinario) throws HistorialMedicoNotFoundException {
+    if (veterinario != null && veterinario.getId() != 0) {
+        return veterinarioRepository.findById(veterinario.getId())
+                .orElseThrow(() -> new HistorialMedicoNotFoundException(veterinario.getId()));
     } else {
-        return veterinarioRepository.save(doctor);
+        return veterinarioRepository.save(veterinario);
     }
     }
 
@@ -79,7 +79,7 @@ public class HistorialMedicoImpl implements HistorialMedicoService {
         HistorialMedico existingHistorialMedico = optionalExistingHistorialMedico.get();
 
         // Actualizar los campos del historial existente con los nuevos datos
-        existingHistorialMedico.setDoctor(historialMedicoDto.getDoctor());
+        existingHistorialMedico.setVeterinario(historialMedicoDto.getVeterinario());
         existingHistorialMedico.setMascota(historialMedicoDto.getMascota());
         existingHistorialMedico.setFechaConsulta(historialMedicoDto.getFechaConsulta());
         existingHistorialMedico.setDiagnostico(historialMedicoDto.getDiagnostico());
@@ -128,7 +128,7 @@ public class HistorialMedicoImpl implements HistorialMedicoService {
 
     @Override
     public List<HistorialMedicoDto> getHistorialesByVeterinarioId(Long veterinarioId) {
-        List<HistorialMedico> historiales = historialMedicoRepository.findByDoctorId(veterinarioId);
+        List<HistorialMedico> historiales = historialMedicoRepository.findByVeterinarioId(veterinarioId);
         return historiales.stream()
                 .map(HistorialMedicoMapper.MAPPER::mapToHistorialMedicoDto)
                 .collect(Collectors.toList());
